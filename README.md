@@ -1,5 +1,8 @@
 # Free Polls (Research Hub)
 
+[![freepolls-org](og-image.png)](https://freepolls.org)
+
+
 The authority on online polling. Discover polling trends, compare the best free poll makers, and learn how to create viral polls that engage your audience.
 
 **Live:** [freepolls.org](https://freepolls.org)
