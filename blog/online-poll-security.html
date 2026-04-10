@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Poll Security: How to Prevent Vote Manipulation | Free Polls</title>
+    <meta name="description" content="Learn how to protect online polls from vote manipulation, bot attacks, and brigading. Covers IP detection, CAPTCHA, browser fingerprinting, rate limiting, and OWASP best practices.">
+    <meta name="keywords" content="online poll security, prevent vote manipulation, poll bot detection, vote brigading, poll fraud prevention, CAPTCHA polls, browser fingerprinting">
+    <link rel="canonical" href="https://freepolls.org/blog/online-poll-security.html">
+
+    <meta property="og:title" content="Online Poll Security: How to Prevent Vote Manipulation">
+    <meta property="og:description" content="A research-backed guide to securing online polls against bots, brigading, and fraud. Includes real-world case studies and a practical security checklist.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://freepolls.org/blog/online-poll-security.html">
+    <meta property="og:site_name" content="Free Polls">
+    <meta property="article:published_time" content="2026-03-18">
+    <meta property="article:modified_time" content="2026-03-18">
+    <meta property="article:section" content="Security">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Online Poll Security: How to Prevent Vote Manipulation">
+    <meta name="twitter:description" content="Research-backed guide to securing online polls against bots, brigading, and fraud.">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Online Poll Security: How to Prevent Vote Manipulation",
+        "description": "A research-backed guide to securing online polls against bots, brigading, and fraud. Covers IP detection, CAPTCHA, browser fingerprinting, rate limiting, authentication, and OWASP recommendations.",
+        "url": "https://freepolls.org/blog/online-poll-security.html",
+        "datePublished": "2026-03-18",
+        "dateModified": "2026-03-18",
+        "author": {
+            "@type": "Organization",
+            "name": "Free Polls",
+            "url": "https://freepolls.org"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Free Polls",
+            "url": "https://freepolls.org"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://freepolls.org/blog/online-poll-security.html"
+        },
+        "wordCount": 2800,
+        "timeRequired": "PT10M"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://freepolls.org" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://freepolls.org/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Online Poll Security: How to Prevent Vote Manipulation" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: #16161f;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --accent-primary: #ec4899;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .header-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 100px 24px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb ol {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb li + li::before {
+            content: '/';
+            margin-right: 8px;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+
+        .breadcrumb li:last-child {
+            color: var(--text-secondary);
+        }
+
+        /* Article */
+        .article-header {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 0;
+        }
+
+        .article-category-tag {
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #d4d4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Article Body */
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .article-body h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 56px 0 20px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .article-body h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 40px 0 14px;
+            color: var(--text-primary);
+        }
+
+        .article-body p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+        }
+
+        .article-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .article-body a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .article-body a:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Callout boxes */
+        .callout {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 32px 0;
+        }
+
+        .callout.tip {
+            border-left-color: var(--success);
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            color: var(--accent-primary);
+        }
+
+        .callout.tip .callout-title { color: var(--success); }
+        .callout.warning .callout-title { color: var(--warning); }
+
+        .callout p {
+            margin-bottom: 0;
+            font-size: 0.98rem;
+        }
+
+        /* Comparison table */
+        .poll-type-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.95rem;
+        }
+
+        .poll-type-table th,
+        .poll-type-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .poll-type-table th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .poll-type-table td {
+            color: var(--text-secondary);
+        }
+
+        .poll-type-table tbody tr:hover {
+            background: var(--bg-card);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .toc ol {
+            list-style: none;
+            padding: 0;
+            counter-reset: toc-counter;
+        }
+
+        .toc li {
+            counter-increment: toc-counter;
+            margin-bottom: 10px;
+        }
+
+        .toc li::before {
+            content: counter(toc-counter) ".";
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            border-bottom: none;
+        }
+
+        .toc a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* Checklist */
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            position: relative;
+            padding-left: 32px;
+            margin-bottom: 12px;
+        }
+
+        .checklist li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 6px;
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 4px;
+        }
+
+        /* CTA */
+        .article-cta {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(236, 72, 153, 0.08));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin: 48px 0;
+        }
+
+        .article-cta h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .article-cta p {
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(236, 72, 153, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Related Articles */
+        .related-articles {
+            padding: 60px 24px 80px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .related-articles h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+
+        .related-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: all 0.3s;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        .related-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .related-card h3 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.15rem;
+            transition: color 0.2s;
+        }
+
+        .related-card h3 a:hover {
+            color: var(--accent-primary);
+        }
+
+        .related-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Mobile Nav */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 110;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 105;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .mobile-nav .mobile-cta {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .article-header h1 { font-size: 2rem; }
+            .article-body h2 { font-size: 1.4rem; }
+            .article-cta { padding: 28px 20px; }
+            .article-meta { flex-wrap: wrap; gap: 12px; }
+
+            .poll-type-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .breadcrumb { padding-top: 85px; }
+            .article-header { padding-top: 24px; }
+            .article-header h1 { font-size: 1.7rem; }
+            .article-body { padding: 0 16px 60px; }
+            .toc { padding: 20px 22px; }
+        }
+    </style>
+    <script>window.SNAPIT_TRACKING_ID='SA_4b49a2e2ab3f';</script>
+    <script src="https://snapitanalytics.com/analytics.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="https://freepolls.org" class="logo">Free Polls</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+                    <li><a href="https://freepolls.org/blog/" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="https://pollpixie.com" class="header-cta" data-i18n="nav.cta">Create a Poll</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Open menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="https://freepolls.org" data-i18n="nav.home">Home</a>
+        <a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a>
+        <a href="https://pollpixie.com" class="mobile-cta" data-i18n="nav.cta">Create a Poll</a>
+        <button style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-primary);cursor:pointer;padding:8px;" aria-label="Close menu" onclick="document.querySelector('.mobile-nav').classList.remove('open');">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="https://freepolls.org">Home</a></li>
+            <li><a href="https://freepolls.org/blog/">Blog</a></li>
+            <li data-i18n="breadcrumb">Online Poll Security</li>
+        </ol>
+    </nav>
+
+    <header class="article-header">
+        <span class="article-category-tag" data-i18n="category">Security</span>
+        <h1 data-i18n="title">Online Poll Security: How to Prevent Vote Manipulation</h1>
+        <p class="subtitle" data-i18n="subtitle">Bots, brigading, and ballot stuffing have plagued online polls for decades. Here is what the research says about stopping them -- and what actually works in practice.</p>
+        <div class="article-meta">
+            <span class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Published Mar 18, 2026
+            </span>
+            <span class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                10 min read
+            </span>
+        </div>
+    </header>
+
+    <article class="article-body">
+
+        <nav class="toc">
+            <div class="toc-title" data-i18n="toc.title">In This Article</div>
+            <ol>
+                <li><a href="#why-it-matters" data-i18n="toc.1">Why Poll Security Matters</a></li>
+                <li><a href="#attack-vectors" data-i18n="toc.2">Common Attack Vectors</a></li>
+                <li><a href="#prevention" data-i18n="toc.3">Prevention Techniques That Work</a></li>
+                <li><a href="#owasp" data-i18n="toc.4">OWASP Recommendations for Polls</a></li>
+                <li><a href="#pollpixie" data-i18n="toc.5">How Poll Pixie Handles Security</a></li>
+                <li><a href="#checklist" data-i18n="toc.6">Your Poll Security Checklist</a></li>
+            </ol>
+        </nav>
+
+        <h2 id="why-it-matters" data-i18n="s1.title">1. Why Poll Security Matters</h2>
+
+        <p data-i18n="s1.p1">Online polls shape public perception, influence business decisions, and drive media narratives. When they are manipulated, the consequences range from embarrassing to genuinely harmful. And manipulation is far more common than most poll creators realize.</p>
+
+        <p data-i18n="s1.p2">The most famous example is the <strong>2009 TIME Magazine "Most Influential Person" poll</strong>. Members of 4chan's /b/ board organized a coordinated attack that <a href="https://techcrunch.com/2009/04/27/time-magazine-throws-up-its-hands-as-it-gets-pwned-by-4chan/" target="_blank" rel="noopener">flooded the poll with approximately 5,000 votes per minute</a>, propelling 4chan founder Christopher "moot" Poole to the number one spot -- ahead of Barack Obama, Oprah Winfrey, and every other nominee. The attackers even manipulated the first letters of the top 21 names to spell out a message. TIME ultimately acknowledged the hack but let the results stand, calling it a lesson in the limits of open internet voting.</p>
+
+        <p data-i18n="s1.p3">That incident was a prank. But the same techniques are routinely used for more consequential purposes: manipulating product reviews, skewing political sentiment, gaming award nominations, and distorting market research that companies use to make million-dollar decisions.</p>
+
+        <div class="callout warning">
+            <div class="callout-title" data-i18n="s1.callout.title">The Core Problem</div>
+            <p data-i18n="s1.callout.p">Any poll that accepts anonymous, unauthenticated votes from the open internet is vulnerable by default. Security is not a feature you add later -- it needs to be part of the design from the start.</p>
+        </div>
+
+        <h2 id="attack-vectors" data-i18n="s2.title">2. Common Attack Vectors</h2>
+
+        <p data-i18n="s2.p1">Understanding how polls get manipulated is the first step toward preventing it. Attacks generally fall into two categories: automated and human-coordinated.</p>
+
+        <h3 data-i18n="s2.h3a">Bot voting</h3>
+
+        <p data-i18n="s2.p2">Automated scripts that submit votes at scale are the most common attack. A basic bot can be written in a few lines of Python and can submit thousands of votes per minute by sending HTTP POST requests directly to a poll's API endpoint, bypassing the user interface entirely. More sophisticated bots rotate IP addresses using proxy networks, randomize request timing to mimic human behavior, and solve simple CAPTCHAs using OCR libraries or third-party solving services.</p>
+
+        <h3 data-i18n="s2.h3b">Manual brigading</h3>
+
+        <p data-i18n="s2.p3">Coordinated human voting -- where a community rallies its members to flood a poll -- is harder to detect because each individual vote looks legitimate. The voters are real people using real browsers from real IP addresses. They are simply organized.</p>
+
+        <p data-i18n="s2.p4">This was on full display during the <strong>2019 Democratic primary debate</strong>. Post-debate online polls on sites like the Drudge Report showed Tulsi Gabbard winning with roughly 40% of the vote, despite the fact that she was <a href="https://www.nbcnews.com/tech/tech-news/trolls-target-online-polls-following-first-democratic-presidential-debate-n1023406" target="_blank" rel="noopener">polling at approximately 2% in scientific surveys</a>. NBC News reported that organized online communities, including groups on Reddit, 4chan, and Twitter, had coordinated to flood every available post-debate poll. The same pattern occurred after the 2016 presidential debates, where snap online polls showed dramatically different results from subsequent scientific polling.</p>
+
+        <h3 data-i18n="s2.h3c">Multi-account fraud</h3>
+
+        <p data-i18n="s2.p5">Attackers create dozens or hundreds of accounts on a platform specifically to cast multiple votes. This is particularly effective against polls that rely solely on account-based deduplication without additional verification layers.</p>
+
+        <h3 data-i18n="s2.h3d">Cookie and session manipulation</h3>
+
+        <p data-i18n="s2.p6">Polls that use browser cookies to prevent duplicate voting are trivially bypassed by clearing cookies, using incognito windows, or running requests through automated tools that do not store cookies at all.</p>
+
+        <table class="poll-type-table">
+            <thead>
+                <tr>
+                    <th data-i18n="s2.th1">Attack Type</th>
+                    <th data-i18n="s2.th2">Difficulty</th>
+                    <th data-i18n="s2.th3">Scale</th>
+                    <th data-i18n="s2.th4">Detection Difficulty</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-i18n="s2.t1r1c1"><strong>Simple bot</strong></td>
+                    <td data-i18n="s2.t1r1c2">Low</td>
+                    <td data-i18n="s2.t1r1c3">Thousands/minute</td>
+                    <td data-i18n="s2.t1r1c4">Easy</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s2.t1r2c1"><strong>Advanced bot (proxy rotation)</strong></td>
+                    <td data-i18n="s2.t1r2c2">Medium</td>
+                    <td data-i18n="s2.t1r2c3">Hundreds/minute</td>
+                    <td data-i18n="s2.t1r2c4">Moderate</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s2.t1r3c1"><strong>Cookie/session clearing</strong></td>
+                    <td data-i18n="s2.t1r3c2">Low</td>
+                    <td data-i18n="s2.t1r3c3">Tens/hour</td>
+                    <td data-i18n="s2.t1r3c4">Easy</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s2.t1r4c1"><strong>Multi-account fraud</strong></td>
+                    <td data-i18n="s2.t1r4c2">Medium</td>
+                    <td data-i18n="s2.t1r4c3">Dozens/day</td>
+                    <td data-i18n="s2.t1r4c4">Moderate</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s2.t1r5c1"><strong>Coordinated brigading</strong></td>
+                    <td data-i18n="s2.t1r5c2">High (requires community)</td>
+                    <td data-i18n="s2.t1r5c3">Hundreds to thousands</td>
+                    <td data-i18n="s2.t1r5c4">Very hard</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="prevention" data-i18n="s3.title">3. Prevention Techniques That Work</h2>
+
+        <p data-i18n="s3.p1">No single technique stops all attacks. Effective poll security uses multiple layers, each catching what the others miss.</p>
+
+        <h3 data-i18n="s3.h3a">IP-based detection</h3>
+
+        <p data-i18n="s3.p2">Tracking voter IP addresses and limiting one vote per IP is the simplest deduplication method. It stops casual repeat voters and basic bots immediately. However, it has well-known limitations: VPN services allow users to change their apparent IP address in seconds, corporate networks and universities route hundreds of legitimate users through a single IP (potentially blocking valid votes), and mobile carriers use carrier-grade NAT, meaning thousands of users share the same public IP.</p>
+
+        <p data-i18n="s3.p3">IP detection works best as a first-pass filter combined with other techniques, not as a sole defense.</p>
+
+        <h3 data-i18n="s3.h3b">CAPTCHA challenges</h3>
+
+        <p data-i18n="s3.p4">CAPTCHAs (Completely Automated Public Turing tests to tell Computers and Humans Apart) add a challenge that bots must solve before voting. Modern implementations like reCAPTCHA v3 and hCaptcha run invisibly in the background, scoring each visitor's likelihood of being human without requiring any interaction.</p>
+
+        <p data-i18n="s3.p5">However, CAPTCHAs do not solve the full problem. Research from the <a href="https://health.uconn.edu/clinical-research-center/wp-content/uploads/sites/50/2024/05/Avoiding-and-Detecting-Bots-and-Fraud_REDCapSurveys_.pdf" target="_blank" rel="noopener">University of Connecticut Clinical Research Center</a> on detecting fraud in online surveys found that a significant portion of fraudulent responses come from real humans, not bots -- people operating through click farms, paid survey panels, or coordinated communities. CAPTCHA stops automated scripts but does nothing against a human being who is deliberately voting multiple times from different devices.</p>
+
+        <div class="callout">
+            <div class="callout-title" data-i18n="s3.callout.title">Key Insight</div>
+            <p data-i18n="s3.callout.p">CAPTCHA is necessary but not sufficient. It eliminates the lowest-effort automated attacks, but sophisticated manipulation -- especially human-coordinated brigading -- requires additional detection layers beyond simple bot filtering.</p>
+        </div>
+
+        <h3 data-i18n="s3.h3c">Browser fingerprinting</h3>
+
+        <p data-i18n="s3.p6">Browser fingerprinting collects a combination of device attributes -- screen resolution, installed fonts, WebGL renderer, timezone, language settings, and dozens of other signals -- to create a unique identifier for each visitor. Even if someone clears cookies or switches IP addresses, their browser fingerprint often remains consistent.</p>
+
+        <p data-i18n="s3.p7">Research by <a href="https://gangw.cs.illinois.edu/www22-bot.pdf" target="_blank" rel="noopener">Zhang et al., published at The Web Conference (WWW '22)</a>, demonstrated the effectiveness of this approach in detecting multi-account fraud. The researchers found that among 48 worker IDs examined, only 16 unique browser fingerprints existed -- meaning the average fraudster was operating approximately 3.4 accounts per person. Fingerprinting identified these duplicate accounts even when the attackers used different usernames, email addresses, and IP addresses.</p>
+
+        <p data-i18n="s3.p8">The limitation is privacy: fingerprinting operates in a legal gray area under GDPR and similar regulations, and some browsers (Firefox, Brave) actively resist fingerprinting by randomizing or blocking the signals it relies on.</p>
+
+        <h3 data-i18n="s3.h3d">Rate limiting</h3>
+
+        <p data-i18n="s3.p9">Rate limiting caps the number of votes accepted from a single source within a given time window. For example, allowing a maximum of one vote per IP address per poll, or throttling any IP that submits more than five requests per minute across all endpoints.</p>
+
+        <p data-i18n="s3.p10">Rate limiting is particularly effective against automated attacks because bots typically operate at speeds that are orders of magnitude faster than human behavior. Even a generous rate limit (say, 10 requests per minute) will block a bot submitting 5,000 votes per minute while having zero impact on legitimate voters.</p>
+
+        <h3 data-i18n="s3.h3e">Authentication requirements</h3>
+
+        <p data-i18n="s3.p11">Requiring voters to authenticate -- via email verification, Google/Apple sign-in, or SSO -- dramatically raises the cost of manipulation. Creating fake email addresses is possible but slow. OAuth providers like Google actively detect and suspend fake accounts. The trade-off is friction: requiring sign-in reduces total participation by 40-60% compared to anonymous polls, because many people will not bother creating an account just to cast a vote.</p>
+
+        <p data-i18n="s3.p12">The right choice depends on what matters more for your use case: maximum participation or maximum integrity.</p>
+
+        <h3 data-i18n="s3.h3f">Behavioral analysis</h3>
+
+        <p data-i18n="s3.p13">Advanced poll platforms analyze voter behavior patterns to flag anomalies: votes arriving at unnaturally consistent intervals, submissions that bypass the user interface entirely (direct API calls), sessions with zero mouse movement or scrolling, and sudden traffic spikes from a single geographic region. These signals, individually weak, become strong indicators of manipulation when combined.</p>
+
+        <table class="poll-type-table">
+            <thead>
+                <tr>
+                    <th data-i18n="s3.t2h1">Technique</th>
+                    <th data-i18n="s3.t2h2">Stops Bots</th>
+                    <th data-i18n="s3.t2h3">Stops Brigading</th>
+                    <th data-i18n="s3.t2h4">User Friction</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-i18n="s3.t2r1c1"><strong>IP detection</strong></td>
+                    <td data-i18n="s3.t2r1c2">Partially</td>
+                    <td data-i18n="s3.t2r1c3">No</td>
+                    <td data-i18n="s3.t2r1c4">None</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s3.t2r2c1"><strong>CAPTCHA</strong></td>
+                    <td data-i18n="s3.t2r2c2">Yes</td>
+                    <td data-i18n="s3.t2r2c3">No</td>
+                    <td data-i18n="s3.t2r2c4">Low</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s3.t2r3c1"><strong>Browser fingerprinting</strong></td>
+                    <td data-i18n="s3.t2r3c2">Yes</td>
+                    <td data-i18n="s3.t2r3c3">Partially</td>
+                    <td data-i18n="s3.t2r3c4">None</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s3.t2r4c1"><strong>Rate limiting</strong></td>
+                    <td data-i18n="s3.t2r4c2">Yes</td>
+                    <td data-i18n="s3.t2r4c3">No</td>
+                    <td data-i18n="s3.t2r4c4">None</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s3.t2r5c1"><strong>Authentication</strong></td>
+                    <td data-i18n="s3.t2r5c2">Yes</td>
+                    <td data-i18n="s3.t2r5c3">Partially</td>
+                    <td data-i18n="s3.t2r5c4">High</td>
+                </tr>
+                <tr>
+                    <td data-i18n="s3.t2r6c1"><strong>Behavioral analysis</strong></td>
+                    <td data-i18n="s3.t2r6c2">Yes</td>
+                    <td data-i18n="s3.t2r6c3">Partially</td>
+                    <td data-i18n="s3.t2r6c4">None</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 id="owasp" data-i18n="s4.title">4. OWASP Recommendations for Polls</h2>
+
+        <p data-i18n="s4.p1">The Open Web Application Security Project (OWASP) does not publish poll-specific guidelines, but several of their core recommendations apply directly to poll security.</p>
+
+        <h3 data-i18n="s4.h3a">Anti-CSRF tokens</h3>
+
+        <p data-i18n="s4.p2">Cross-Site Request Forgery (CSRF) attacks trick a user's browser into submitting a vote without their knowledge -- for example, by embedding a hidden form submission in an image tag or iframe on a malicious page. OWASP recommends including a unique, unpredictable token with every form submission and validating it server-side before processing the request. Any poll that accepts votes via POST requests without CSRF protection is vulnerable to this attack.</p>
+
+        <h3 data-i18n="s4.h3b">Server-side validation</h3>
+
+        <p data-i18n="s4.p3">Never trust the client. All vote validation -- checking that the poll exists, that the selected option is valid, that the voter has not already voted, and that rate limits have not been exceeded -- must happen on the server. Client-side JavaScript checks are trivially bypassed by anyone who opens their browser's developer tools or sends requests directly via curl.</p>
+
+        <h3 data-i18n="s4.h3c">Input sanitization</h3>
+
+        <p data-i18n="s4.p4">Polls that accept free-text input (comments, "Other" options) must sanitize all input to prevent XSS (Cross-Site Scripting) and injection attacks. A poll comment field that renders unsanitized HTML is an open invitation for attackers to inject malicious scripts that execute in other voters' browsers.</p>
+
+        <h3 data-i18n="s4.h3d">Secure transport</h3>
+
+        <p data-i18n="s4.p5">All poll traffic -- votes, results, authentication -- must use HTTPS. Unencrypted HTTP connections allow man-in-the-middle attackers to intercept votes, modify results in transit, or hijack sessions.</p>
+
+        <h2 id="pollpixie" data-i18n="s5.title">5. How Poll Pixie Handles Security</h2>
+
+        <p data-i18n="s5.p1"><a href="https://pollpixie.com">Poll Pixie</a> implements multiple layers of the defenses described above, designed to balance security with usability so that poll creators do not need to become security experts.</p>
+
+        <ul>
+            <li data-i18n="s5.li1"><strong>Duplicate vote prevention:</strong> Every poll enforces one-vote-per-person using a combination of IP address tracking and session fingerprinting. Repeat votes from the same source are silently rejected.</li>
+            <li data-i18n="s5.li2"><strong>Rate limiting:</strong> API-level rate limiting (enforced via AWS WAF) caps requests at 300 per 5 minutes per IP address, stopping automated flooding before it reaches the application layer.</li>
+            <li data-i18n="s5.li3"><strong>IP detection:</strong> Votes are logged with source IP metadata, enabling post-hoc analysis of suspicious patterns and geographic anomalies.</li>
+            <li data-i18n="s5.li4"><strong>Server-side validation:</strong> All vote processing, deduplication, and result tabulation happens server-side in Lambda functions. Client-side code handles display only.</li>
+            <li data-i18n="s5.li5"><strong>HTTPS everywhere:</strong> All traffic is served over TLS via CloudFront with HSTS headers enforced, preventing downgrade attacks.</li>
+            <li data-i18n="s5.li6"><strong>Authentication options:</strong> For high-stakes polls, creators can require Google OAuth or email verification before voting, adding an identity layer on top of the default protections.</li>
+        </ul>
+
+        <div class="callout tip">
+            <div class="callout-title" data-i18n="s5.callout.title">Best Practice</div>
+            <p data-i18n="s5.callout.p">For polls where result integrity is critical -- employee votes, community decisions, product prioritization -- enable authentication. For casual engagement polls where you want maximum participation, the default IP and session protections provide a strong baseline.</p>
+        </div>
+
+        <h2 id="checklist" data-i18n="s6.title">6. Your Poll Security Checklist</h2>
+
+        <p data-i18n="s6.p1">Whether you use Poll Pixie or another platform, run through this checklist before publishing any poll where results matter.</p>
+
+        <ul class="checklist">
+            <li data-i18n="s6.cl1"><strong>HTTPS enforced</strong> -- All poll pages and API endpoints served over TLS. No mixed content.</li>
+            <li data-i18n="s6.cl2"><strong>CSRF tokens implemented</strong> -- Every vote submission includes and validates a unique token.</li>
+            <li data-i18n="s6.cl3"><strong>Server-side deduplication</strong> -- Vote uniqueness enforced on the server, not via cookies or JavaScript.</li>
+            <li data-i18n="s6.cl4"><strong>Rate limiting configured</strong> -- Maximum requests per IP per time window set to a reasonable threshold.</li>
+            <li data-i18n="s6.cl5"><strong>IP logging enabled</strong> -- Source IPs recorded for post-hoc anomaly analysis.</li>
+            <li data-i18n="s6.cl6"><strong>Input sanitized</strong> -- All user-supplied text (comments, "Other" fields) escaped before storage and rendering.</li>
+            <li data-i18n="s6.cl7"><strong>Authentication available</strong> -- Option to require email or OAuth sign-in for high-stakes polls.</li>
+            <li data-i18n="s6.cl8"><strong>Results monitoring</strong> -- Active monitoring for sudden vote spikes, geographic anomalies, or suspicious timing patterns.</li>
+            <li data-i18n="s6.cl9"><strong>Client-side logic minimized</strong> -- No vote validation, counting, or deduplication performed in JavaScript.</li>
+            <li data-i18n="s6.cl10"><strong>Closing date set</strong> -- Time-bounded polls reduce the window available for coordinated attacks.</li>
+        </ul>
+
+        <div class="callout">
+            <div class="callout-title" data-i18n="s6.callout.title">Remember</div>
+            <p data-i18n="s6.callout.p">No poll is perfectly secure against a sufficiently motivated attacker. The goal is to raise the cost of manipulation high enough that it exceeds the value of the outcome. For most polls, the combination of IP detection, rate limiting, and server-side validation achieves exactly that.</p>
+        </div>
+
+        <div class="article-cta">
+            <h3 data-i18n="cta.title">Create Secure Polls in Seconds</h3>
+            <p data-i18n="cta.p">Poll Pixie includes built-in vote deduplication, rate limiting, and optional authentication -- so you can focus on your question, not your security configuration.</p>
+            <a href="https://pollpixie.com" class="btn-primary" data-i18n="cta.btn">Create a Free Poll</a>
+        </div>
+
+    </article>
+
+    <section class="related-articles">
+        <h2 data-i18n="related.title">Continue Reading</h2>
+        <div class="related-card">
+            <h3><a href="how-to-create-online-poll.html" data-i18n="related.card.title">How to Create an Online Poll: The Complete Guide</a></h3>
+            <p data-i18n="related.card.p">A practical, step-by-step walkthrough for building polls that people actually want to answer -- from choosing a poll type to analyzing results.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="https://freepolls.org" class="footer-logo">Free Polls</a>
+        <p data-i18n="footer.tagline">The authority on online polling trends, research, and best practices.</p>
+        <ul class="footer-links">
+            <li><a href="https://freepolls.org">Home</a></li>
+            <li><a href="https://freepolls.org/blog/">Blog</a></li>
+            <li><a href="https://pollpixie.com">Poll Pixie</a></li>
+            <li><a href="https://freepolls.org/privacy.html">Privacy</a></li>
+            <li><a href="https://freepolls.org/terms.html">Terms</a></li>
+        </ul>
+    </footer>
+
+
+    <script>
+    window.TRANSLATIONS = { es: {
+        'nav.home': 'Inicio',
+        'nav.blog': 'Blog',
+        'nav.cta': 'Crear una Encuesta',
+        'breadcrumb': 'Seguridad de Encuestas en Línea',
+        'category': 'Seguridad',
+        'title': 'Seguridad de Encuestas en Línea: Cómo Prevenir la Manipulación de Votos',
+        'subtitle': 'Los bots, el brigading y el relleno de votos han afectado a las encuestas en línea durante décadas. Esto es lo que dice la investigación sobre cómo detenerlos -- y lo que realmente funciona en la práctica.',
+        'toc.title': 'En Este Artículo',
+        'toc.1': 'Por Qué Importa la Seguridad de las Encuestas',
+        'toc.2': 'Vectores de Ataque Comunes',
+        'toc.3': 'Técnicas de Prevención que Funcionan',
+        'toc.4': 'Recomendaciones de OWASP para Encuestas',
+        'toc.5': 'Cómo Poll Pixie Gestiona la Seguridad',
+        'toc.6': 'Tu Lista de Verificación de Seguridad',
+        's1.title': '1. Por Qué Importa la Seguridad de las Encuestas',
+        's1.p1': 'Las encuestas en línea moldean la percepción pública, influyen en las decisiones empresariales y generan narrativas mediáticas. Cuando se manipulan, las consecuencias van desde lo vergonzoso hasta lo genuinamente dañino. Y la manipulación es mucho más común de lo que la mayoría de los creadores de encuestas creen.',
+        's1.p2': 'El ejemplo más famoso es la <strong>encuesta de la revista TIME de 2009 sobre la "Persona Más Influyente"</strong>. Miembros del tablero /b/ de 4chan organizaron un ataque coordinado que <a href="https://techcrunch.com/2009/04/27/time-magazine-throws-up-its-hands-as-it-gets-pwned-by-4chan/" target="_blank" rel="noopener">inundó la encuesta con aproximadamente 5,000 votos por minuto</a>, impulsando al fundador de 4chan, Christopher "moot" Poole, al primer puesto -- por delante de Barack Obama, Oprah Winfrey y todos los demás nominados. Los atacantes incluso manipularon las primeras letras de los 21 nombres principales para deletrear un mensaje. TIME finalmente reconoció el hackeo pero dejó los resultados tal como estaban, llamándolo una lección sobre los límites de la votación abierta en internet.',
+        's1.p3': 'Ese incidente fue una broma. Pero las mismas técnicas se usan rutinariamente para propósitos más importantes: manipular reseñas de productos, sesgar el sentimiento político, alterar nominaciones a premios y distorsionar investigaciones de mercado que las empresas usan para tomar decisiones millonarias.',
+        's1.callout.title': 'El Problema Central',
+        's1.callout.p': 'Cualquier encuesta que acepte votos anónimos y no autenticados desde internet abierto es vulnerable por defecto. La seguridad no es una función que se añade después -- necesita ser parte del diseño desde el principio.',
+        's2.title': '2. Vectores de Ataque Comunes',
+        's2.p1': 'Entender cómo se manipulan las encuestas es el primer paso para prevenirlo. Los ataques generalmente caen en dos categorías: automatizados y coordinados por humanos.',
+        's2.h3a': 'Votación por bots',
+        's2.p2': 'Los scripts automatizados que envían votos a escala son el ataque más común. Un bot básico se puede escribir en pocas líneas de Python y puede enviar miles de votos por minuto mediante solicitudes HTTP POST directamente al endpoint API de la encuesta, evitando la interfaz de usuario por completo. Los bots más sofisticados rotan direcciones IP usando redes proxy, aleatorizan los tiempos de solicitud para imitar el comportamiento humano y resuelven CAPTCHAs simples usando bibliotecas OCR o servicios de resolución de terceros.',
+        's2.h3b': 'Brigading manual',
+        's2.p3': 'La votación humana coordinada -- donde una comunidad moviliza a sus miembros para inundar una encuesta -- es más difícil de detectar porque cada voto individual parece legítimo. Los votantes son personas reales usando navegadores reales desde direcciones IP reales. Simplemente están organizados.',
+        's2.p4': 'Esto se vio claramente durante el <strong>debate de las primarias demócratas de 2019</strong>. Las encuestas en línea posteriores al debate en sitios como Drudge Report mostraban a Tulsi Gabbard ganando con aproximadamente el 40% de los votos, a pesar de que ella estaba <a href="https://www.nbcnews.com/tech/tech-news/trolls-target-online-polls-following-first-democratic-presidential-debate-n1023406" target="_blank" rel="noopener">en aproximadamente el 2% en encuestas científicas</a>. NBC News informó que comunidades en línea organizadas, incluyendo grupos en Reddit, 4chan y Twitter, se habían coordinado para inundar todas las encuestas disponibles posteriores al debate.',
+        's2.h3c': 'Fraude de múltiples cuentas',
+        's2.p5': 'Los atacantes crean docenas o cientos de cuentas en una plataforma específicamente para emitir múltiples votos. Esto es particularmente efectivo contra encuestas que dependen únicamente de la deduplicación basada en cuentas sin capas de verificación adicionales.',
+        's2.h3d': 'Manipulación de cookies y sesiones',
+        's2.p6': 'Las encuestas que usan cookies del navegador para prevenir votos duplicados se evitan trivialmente borrando cookies, usando ventanas de incógnito o ejecutando solicitudes a través de herramientas automatizadas que no almacenan cookies.',
+        's2.th1': 'Tipo de Ataque',
+        's2.th2': 'Dificultad',
+        's2.th3': 'Escala',
+        's2.th4': 'Dificultad de Detección',
+        's2.t1r1c1': '<strong>Bot simple</strong>',
+        's2.t1r1c2': 'Baja',
+        's2.t1r1c3': 'Miles/minuto',
+        's2.t1r1c4': 'Fácil',
+        's2.t1r2c1': '<strong>Bot avanzado (rotación de proxy)</strong>',
+        's2.t1r2c2': 'Media',
+        's2.t1r2c3': 'Cientos/minuto',
+        's2.t1r2c4': 'Moderada',
+        's2.t1r3c1': '<strong>Limpieza de cookies/sesión</strong>',
+        's2.t1r3c2': 'Baja',
+        's2.t1r3c3': 'Decenas/hora',
+        's2.t1r3c4': 'Fácil',
+        's2.t1r4c1': '<strong>Fraude de múltiples cuentas</strong>',
+        's2.t1r4c2': 'Media',
+        's2.t1r4c3': 'Docenas/día',
+        's2.t1r4c4': 'Moderada',
+        's2.t1r5c1': '<strong>Brigading coordinado</strong>',
+        's2.t1r5c2': 'Alta (requiere comunidad)',
+        's2.t1r5c3': 'Cientos a miles',
+        's2.t1r5c4': 'Muy difícil',
+        's3.title': '3. Técnicas de Prevención que Funcionan',
+        's3.p1': 'Ninguna técnica individual detiene todos los ataques. La seguridad efectiva de encuestas usa múltiples capas, cada una atrapando lo que las otras no detectan.',
+        's3.h3a': 'Detección basada en IP',
+        's3.p2': 'Rastrear las direcciones IP de los votantes y limitar un voto por IP es el método de deduplicación más simple. Detiene a los votantes repetidos casuales y bots básicos inmediatamente. Sin embargo, tiene limitaciones bien conocidas: los servicios VPN permiten a los usuarios cambiar su dirección IP aparente en segundos, las redes corporativas y universidades enrutan cientos de usuarios legítimos a través de una sola IP (potencialmente bloqueando votos válidos), y los operadores móviles usan NAT de grado carrier, lo que significa que miles de usuarios comparten la misma IP pública.',
+        's3.p3': 'La detección por IP funciona mejor como filtro de primera pasada combinado con otras técnicas, no como defensa única.',
+        's3.h3b': 'Desafíos CAPTCHA',
+        's3.p4': 'Los CAPTCHAs (Pruebas de Turing Públicas Completamente Automatizadas para distinguir Computadoras y Humanos) añaden un desafío que los bots deben resolver antes de votar. Las implementaciones modernas como reCAPTCHA v3 y hCaptcha se ejecutan invisiblemente en segundo plano, puntuando la probabilidad de que cada visitante sea humano sin requerir ninguna interacción.',
+        's3.p5': 'Sin embargo, los CAPTCHAs no resuelven el problema completo. La investigación del <a href="https://health.uconn.edu/clinical-research-center/wp-content/uploads/sites/50/2024/05/Avoiding-and-Detecting-Bots-and-Fraud_REDCapSurveys_.pdf" target="_blank" rel="noopener">Centro de Investigación Clínica de la Universidad de Connecticut</a> sobre la detección de fraude en encuestas en línea encontró que una porción significativa de las respuestas fraudulentas proviene de humanos reales, no de bots -- personas operando a través de granjas de clics, paneles de encuestas pagadas o comunidades coordinadas. CAPTCHA detiene los scripts automatizados pero no hace nada contra un ser humano que deliberadamente vota múltiples veces desde diferentes dispositivos.',
+        's3.callout.title': 'Dato Clave',
+        's3.callout.p': 'CAPTCHA es necesario pero no suficiente. Elimina los ataques automatizados de menor esfuerzo, pero la manipulación sofisticada -- especialmente el brigading coordinado por humanos -- requiere capas de detección adicionales más allá del simple filtrado de bots.',
+        's3.h3c': 'Huella digital del navegador',
+        's3.p6': 'La huella digital del navegador recopila una combinación de atributos del dispositivo -- resolución de pantalla, fuentes instaladas, renderizador WebGL, zona horaria, configuración de idioma y docenas de otras señales -- para crear un identificador único para cada visitante. Incluso si alguien borra las cookies o cambia de dirección IP, su huella digital del navegador a menudo permanece consistente.',
+        's3.p7': 'La investigación de <a href="https://gangw.cs.illinois.edu/www22-bot.pdf" target="_blank" rel="noopener">Zhang et al., publicada en The Web Conference (WWW '22)</a>, demostró la efectividad de este enfoque para detectar fraude de múltiples cuentas. Los investigadores encontraron que entre 48 IDs de trabajadores examinados, solo existían 16 huellas digitales de navegador únicas -- lo que significa que el estafador promedio operaba aproximadamente 3.4 cuentas por persona. La huella digital identificó estas cuentas duplicadas incluso cuando los atacantes usaban diferentes nombres de usuario, direcciones de correo electrónico y direcciones IP.',
+        's3.p8': 'La limitación es la privacidad: la huella digital opera en una zona gris legal bajo el RGPD y regulaciones similares, y algunos navegadores (Firefox, Brave) resisten activamente la huella digital aleatorizando o bloqueando las señales en las que se basa.',
+        's3.h3d': 'Limitación de tasa',
+        's3.p9': 'La limitación de tasa establece un tope en el número de votos aceptados de una sola fuente dentro de una ventana de tiempo determinada. Por ejemplo, permitir un máximo de un voto por dirección IP por encuesta, o limitar cualquier IP que envíe más de cinco solicitudes por minuto en todos los endpoints.',
+        's3.p10': 'La limitación de tasa es particularmente efectiva contra ataques automatizados porque los bots típicamente operan a velocidades que son órdenes de magnitud más rápidas que el comportamiento humano. Incluso un límite generoso (digamos, 10 solicitudes por minuto) bloqueará un bot que envía 5,000 votos por minuto sin tener ningún impacto en los votantes legítimos.',
+        's3.h3e': 'Requisitos de autenticación',
+        's3.p11': 'Requerir que los votantes se autentiquen -- mediante verificación de correo electrónico, inicio de sesión con Google/Apple o SSO -- aumenta drásticamente el costo de la manipulación. Crear direcciones de correo falsas es posible pero lento. Los proveedores OAuth como Google detectan y suspenden activamente las cuentas falsas. La contrapartida es la fricción: requerir inicio de sesión reduce la participación total entre un 40-60% comparado con las encuestas anónimas, porque muchas personas no se molestarán en crear una cuenta solo para emitir un voto.',
+        's3.p12': 'La elección correcta depende de qué importa más para tu caso de uso: máxima participación o máxima integridad.',
+        's3.h3f': 'Análisis de comportamiento',
+        's3.p13': 'Las plataformas avanzadas de encuestas analizan patrones de comportamiento de los votantes para señalar anomalías: votos que llegan a intervalos anormalmente consistentes, envíos que evitan la interfaz de usuario por completo (llamadas directas a la API), sesiones sin movimiento de ratón ni desplazamiento, y picos repentinos de tráfico desde una sola región geográfica. Estas señales, individualmente débiles, se convierten en indicadores fuertes de manipulación cuando se combinan.',
+        's3.t2h1': 'Técnica',
+        's3.t2h2': 'Detiene Bots',
+        's3.t2h3': 'Detiene Brigading',
+        's3.t2h4': 'Fricción del Usuario',
+        's3.t2r1c1': '<strong>Detección de IP</strong>',
+        's3.t2r1c2': 'Parcialmente',
+        's3.t2r1c3': 'No',
+        's3.t2r1c4': 'Ninguna',
+        's3.t2r2c1': '<strong>CAPTCHA</strong>',
+        's3.t2r2c2': 'Sí',
+        's3.t2r2c3': 'No',
+        's3.t2r2c4': 'Baja',
+        's3.t2r3c1': '<strong>Huella digital del navegador</strong>',
+        's3.t2r3c2': 'Sí',
+        's3.t2r3c3': 'Parcialmente',
+        's3.t2r3c4': 'Ninguna',
+        's3.t2r4c1': '<strong>Limitación de tasa</strong>',
+        's3.t2r4c2': 'Sí',
+        's3.t2r4c3': 'No',
+        's3.t2r4c4': 'Ninguna',
+        's3.t2r5c1': '<strong>Autenticación</strong>',
+        's3.t2r5c2': 'Sí',
+        's3.t2r5c3': 'Parcialmente',
+        's3.t2r5c4': 'Alta',
+        's3.t2r6c1': '<strong>Análisis de comportamiento</strong>',
+        's3.t2r6c2': 'Sí',
+        's3.t2r6c3': 'Parcialmente',
+        's3.t2r6c4': 'Ninguna',
+        's4.title': '4. Recomendaciones de OWASP para Encuestas',
+        's4.p1': 'El Proyecto Abierto de Seguridad de Aplicaciones Web (OWASP) no publica directrices específicas para encuestas, pero varias de sus recomendaciones principales se aplican directamente a la seguridad de encuestas.',
+        's4.h3a': 'Tokens Anti-CSRF',
+        's4.p2': 'Los ataques de Falsificación de Solicitud entre Sitios (CSRF) engañan al navegador de un usuario para que envíe un voto sin su conocimiento -- por ejemplo, incrustando un envío de formulario oculto en una etiqueta de imagen o iframe en una página maliciosa. OWASP recomienda incluir un token único e impredecible con cada envío de formulario y validarlo en el servidor antes de procesar la solicitud. Cualquier encuesta que acepte votos mediante solicitudes POST sin protección CSRF es vulnerable a este ataque.',
+        's4.h3b': 'Validación del lado del servidor',
+        's4.p3': 'Nunca confíes en el cliente. Toda la validación de votos -- verificar que la encuesta existe, que la opción seleccionada es válida, que el votante no ha votado ya y que los límites de tasa no se han excedido -- debe ocurrir en el servidor. Las verificaciones JavaScript del lado del cliente se evitan trivialmente por cualquiera que abra las herramientas de desarrollo del navegador o envíe solicitudes directamente mediante curl.',
+        's4.h3c': 'Sanitización de entrada',
+        's4.p4': 'Las encuestas que aceptan entrada de texto libre (comentarios, opciones "Otro") deben sanitizar toda la entrada para prevenir ataques XSS (Cross-Site Scripting) y de inyección. Un campo de comentario de encuesta que renderiza HTML sin sanitizar es una invitación abierta para que los atacantes inyecten scripts maliciosos que se ejecutan en los navegadores de otros votantes.',
+        's4.h3d': 'Transporte seguro',
+        's4.p5': 'Todo el tráfico de encuestas -- votos, resultados, autenticación -- debe usar HTTPS. Las conexiones HTTP sin cifrar permiten a los atacantes intermediarios interceptar votos, modificar resultados en tránsito o secuestrar sesiones.',
+        's5.title': '5. Cómo Poll Pixie Gestiona la Seguridad',
+        's5.p1': '<a href="https://pollpixie.com">Poll Pixie</a> implementa múltiples capas de las defensas descritas anteriormente, diseñadas para equilibrar seguridad con usabilidad para que los creadores de encuestas no necesiten convertirse en expertos en seguridad.',
+        's5.li1': '<strong>Prevención de votos duplicados:</strong> Cada encuesta aplica un voto por persona usando una combinación de rastreo de dirección IP y huella digital de sesión. Los votos repetidos de la misma fuente se rechazan silenciosamente.',
+        's5.li2': '<strong>Limitación de tasa:</strong> La limitación de tasa a nivel de API (aplicada mediante AWS WAF) limita las solicitudes a 300 por cada 5 minutos por dirección IP, deteniendo la inundación automatizada antes de que llegue a la capa de aplicación.',
+        's5.li3': '<strong>Detección de IP:</strong> Los votos se registran con metadatos de IP de origen, permitiendo análisis posterior de patrones sospechosos y anomalías geográficas.',
+        's5.li4': '<strong>Validación del lado del servidor:</strong> Todo el procesamiento de votos, deduplicación y tabulación de resultados ocurre del lado del servidor en funciones Lambda. El código del lado del cliente solo maneja la visualización.',
+        's5.li5': '<strong>HTTPS en todas partes:</strong> Todo el tráfico se sirve sobre TLS mediante CloudFront con cabeceras HSTS aplicadas, previniendo ataques de degradación.',
+        's5.li6': '<strong>Opciones de autenticación:</strong> Para encuestas de alto impacto, los creadores pueden requerir OAuth de Google o verificación por correo electrónico antes de votar, añadiendo una capa de identidad sobre las protecciones predeterminadas.',
+        's5.callout.title': 'Mejor Práctica',
+        's5.callout.p': 'Para encuestas donde la integridad de los resultados es crítica -- votaciones de empleados, decisiones comunitarias, priorización de productos -- activa la autenticación. Para encuestas casuales de participación donde quieres máxima participación, las protecciones predeterminadas de IP y sesión proporcionan una base sólida.',
+        's6.title': '6. Tu Lista de Verificación de Seguridad',
+        's6.p1': 'Ya sea que uses Poll Pixie u otra plataforma, repasa esta lista de verificación antes de publicar cualquier encuesta donde los resultados importan.',
+        's6.cl1': '<strong>HTTPS aplicado</strong> -- Todas las páginas de encuestas y endpoints API servidos sobre TLS. Sin contenido mixto.',
+        's6.cl2': '<strong>Tokens CSRF implementados</strong> -- Cada envío de voto incluye y valida un token único.',
+        's6.cl3': '<strong>Deduplicación del lado del servidor</strong> -- La unicidad de votos se aplica en el servidor, no mediante cookies o JavaScript.',
+        's6.cl4': '<strong>Limitación de tasa configurada</strong> -- Máximo de solicitudes por IP por ventana de tiempo establecido en un umbral razonable.',
+        's6.cl5': '<strong>Registro de IP habilitado</strong> -- IPs de origen registradas para análisis posterior de anomalías.',
+        's6.cl6': '<strong>Entrada sanitizada</strong> -- Todo el texto proporcionado por el usuario (comentarios, campos "Otro") escapado antes del almacenamiento y renderizado.',
+        's6.cl7': '<strong>Autenticación disponible</strong> -- Opción de requerir inicio de sesión por correo electrónico u OAuth para encuestas de alto impacto.',
+        's6.cl8': '<strong>Monitoreo de resultados</strong> -- Monitoreo activo de picos repentinos de votos, anomalías geográficas o patrones de tiempo sospechosos.',
+        's6.cl9': '<strong>Lógica del lado del cliente minimizada</strong> -- Sin validación, conteo o deduplicación de votos realizada en JavaScript.',
+        's6.cl10': '<strong>Fecha de cierre establecida</strong> -- Las encuestas con límite de tiempo reducen la ventana disponible para ataques coordinados.',
+        's6.callout.title': 'Recuerda',
+        's6.callout.p': 'Ninguna encuesta es perfectamente segura contra un atacante suficientemente motivado. El objetivo es elevar el costo de la manipulación lo suficiente como para que exceda el valor del resultado. Para la mayoría de las encuestas, la combinación de detección de IP, limitación de tasa y validación del lado del servidor logra exactamente eso.',
+        'cta.title': 'Crea Encuestas Seguras en Segundos',
+        'cta.p': 'Poll Pixie incluye deduplicación de votos integrada, limitación de tasa y autenticación opcional -- para que puedas enfocarte en tu pregunta, no en tu configuración de seguridad.',
+        'cta.btn': 'Crear una Encuesta Gratis',
+        'related.title': 'Sigue Leyendo',
+        'related.card.title': 'Cómo Crear una Encuesta en Línea: La Guía Completa',
+        'related.card.p': 'Un recorrido práctico paso a paso para crear encuestas que la gente realmente quiera responder -- desde elegir un tipo de encuesta hasta analizar resultados.',
+        'footer.tagline': 'La referencia en tendencias, investigación y mejores prácticas de encuestas en línea.'
+    }};
+    </script>
+    <script src="../i18n.js"></script>
+</body>
+</html>

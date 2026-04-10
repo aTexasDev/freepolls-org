@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment & secrets
+.env
+.env.*
+.env.local
+.env.production
+credentials*
+*.pem
+*.key
+
+# Backend / serverless (not included in public repo)
+backend/
+backend-live/
+deploy-backend/
+lambda/
+.serverless/
+serverless.yml
+serverless-state.json
+
+# Build artifacts
+build/
+dist/
+out/
+.next/
+.cache/
+
+# IDE & OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Internal docs
+CLAUDE.md
+IMPLEMENTATION-PLAN.md
+NEXT-SESSION*.md
+*-AUDIT*.md
+*-BRIEF*.md
+marketing/
+work-logs/
+reports/
+*.zip
+
+# Test artifacts
+test-results/
+playwright-report/
+tests/
+*.spec.js
+playwright.config.js

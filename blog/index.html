@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polling Blog - Guides, Tips & Best Practices | Free Polls</title>
+    <meta name="description" content="Expert guides on online polling, survey design, and audience engagement. Learn how to create effective polls, write unbiased questions, and analyze results.">
+    <meta name="keywords" content="polling blog, online poll guide, survey tips, poll best practices, how to create polls, engagement survey questions">
+    <link rel="canonical" href="https://freepolls.org/blog/">
+
+    <meta property="og:title" content="Polling Blog - Guides & Best Practices | Free Polls">
+    <meta property="og:description" content="Expert guides on online polling, survey design, and audience engagement.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freepolls.org/blog/">
+    <meta property="og:site_name" content="Free Polls">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Polling Blog - Guides & Best Practices | Free Polls">
+    <meta name="twitter:description" content="Expert guides on online polling, survey design, and audience engagement.">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Free Polls Blog",
+        "url": "https://freepolls.org/blog/",
+        "description": "Expert guides on online polling, survey design, and audience engagement",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Free Polls"
+        },
+        "blogPost": [
+            {
+                "@type": "BlogPosting",
+                "headline": "Online Poll Security: How to Prevent Vote Manipulation",
+                "url": "https://freepolls.org/blog/online-poll-security.html",
+                "datePublished": "2026-03-18",
+                "description": "How modern polling tools prevent manipulation, with real-world examples and sourced security research.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "Survey Response Rates: What's Normal and How to Improve Yours",
+                "url": "https://freepolls.org/blog/survey-response-rates.html",
+                "datePublished": "2026-03-18",
+                "description": "Industry benchmarks for survey response rates by channel, plus proven strategies to improve yours.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "Ranked Choice Voting Explained: How It Works and When to Use It",
+                "url": "https://freepolls.org/blog/ranked-choice-voting-explained.html",
+                "datePublished": "2026-03-18",
+                "description": "How ranked choice voting works, where it's used, voter satisfaction data, and when to use it in your polls.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "The Psychology of Survey Questions: How Wording Affects Responses",
+                "url": "https://freepolls.org/blog/psychology-of-survey-questions.html",
+                "datePublished": "2026-03-18",
+                "description": "How cognitive biases like anchoring, framing, and social desirability affect survey responses, with real examples.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "Remote Team Decision-Making: Using Polls to Build Consensus",
+                "url": "https://freepolls.org/blog/remote-team-decision-making.html",
+                "datePublished": "2026-03-18",
+                "description": "How remote teams can use asynchronous polling to make better decisions without more meetings.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "How to Create an Online Poll: The Complete Guide",
+                "url": "https://freepolls.org/blog/how-to-create-online-poll.html",
+                "datePublished": "2026-03-04",
+                "description": "Everything you need to know about creating effective online polls.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            },
+            {
+                "@type": "BlogPosting",
+                "headline": "50 Employee Engagement Survey Questions That Actually Work",
+                "url": "https://freepolls.org/blog/employee-engagement-survey-questions.html",
+                "datePublished": "2026-03-01",
+                "description": "Proven employee engagement survey questions across five key categories.",
+                "author": { "@type": "Organization", "name": "Free Polls" }
+            }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: #16161f;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --accent-primary: #ec4899;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .header-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Hero */
+        .blog-hero {
+            padding: 160px 24px 80px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .blog-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(236, 72, 153, 0.12), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 60%, rgba(236, 72, 153, 0.08), transparent);
+            pointer-events: none;
+        }
+
+        .blog-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .blog-hero p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+
+        /* Article Cards */
+        .articles-section {
+            padding: 0 24px 120px;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .article-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .article-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(236, 72, 153, 0.15);
+        }
+
+        .article-card-visual {
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .article-card:first-child .article-card-visual {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(6, 182, 212, 0.15));
+        }
+
+        .article-card:last-child .article-card-visual {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(245, 158, 11, 0.15));
+        }
+
+        .article-card-visual .icon-wrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .article-card-body {
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .article-category {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+
+        .article-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+
+        .article-card h2 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .article-card h2 a:hover {
+            color: var(--accent-primary);
+        }
+
+        .article-excerpt {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+            flex-grow: 1;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: gap 0.3s;
+        }
+
+        .read-more:hover {
+            gap: 14px;
+        }
+
+        .read-more svg {
+            width: 18px;
+            height: 18px;
+            transition: transform 0.3s;
+        }
+
+        .read-more:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Vote Button */
+        .article-card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 32px 24px;
+        }
+
+        .vote-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            user-select: none;
+        }
+
+        .vote-btn:hover {
+            border-color: var(--accent-primary);
+            color: var(--text-primary);
+            background: rgba(236, 72, 153, 0.08);
+        }
+
+        .vote-btn.voted {
+            background: rgba(236, 72, 153, 0.15);
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+
+        .vote-btn svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.25s ease;
+        }
+
+        .vote-btn:hover svg {
+            transform: translateY(-1px);
+        }
+
+        .vote-btn.voted svg {
+            fill: var(--accent-primary);
+        }
+
+        .vote-count {
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* CTA Banner */
+        .cta-banner {
+            padding: 60px 24px;
+            text-align: center;
+        }
+
+        .cta-banner-inner {
+            max-width: 600px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(236, 72, 153, 0.06));
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 20px;
+            padding: 48px 32px;
+        }
+
+        .cta-banner h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-banner p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(236, 72, 153, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Mobile Nav */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 110;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 105;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .mobile-nav .mobile-cta {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .blog-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .blog-hero p {
+                font-size: 1.05rem;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .article-card-body {
+                padding: 24px;
+            }
+
+            .article-card-footer {
+                padding: 12px 24px 20px;
+            }
+
+            .article-card h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .blog-hero {
+                padding: 130px 16px 60px;
+            }
+
+            .blog-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .articles-section {
+                padding: 0 16px 80px;
+            }
+        }
+    </style>
+    <script>window.SNAPIT_TRACKING_ID='SA_4b49a2e2ab3f';</script>
+    <script src="https://snapitanalytics.com/analytics.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="https://freepolls.org" class="logo">Free Polls</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+                    <li><a href="https://freepolls.org/blog/" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="https://pollpixie.com" class="header-cta" data-i18n="nav.cta">Create a Poll</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Open menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open'); this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="https://freepolls.org" data-i18n="nav.home">Home</a>
+        <a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a>
+        <a href="https://pollpixie.com" class="mobile-cta" data-i18n="nav.cta">Create a Poll</a>
+        <button style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-primary);cursor:pointer;padding:8px;" aria-label="Close menu" onclick="document.querySelector('.mobile-nav').classList.remove('open');">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </nav>
+
+    <section class="blog-hero">
+        <div class="container">
+            <h1 data-i18n="hero.title">The Polling Blog</h1>
+            <p data-i18n="hero.subtitle">Practical guides on creating effective polls, writing better survey questions, and turning responses into real insights.</p>
+        </div>
+    </section>
+
+    <section class="articles-section">
+        <div class="container">
+            <div class="articles-grid">
+
+                <article class="article-card" data-article="online-poll-security">
+                    <div class="article-card-visual" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(236, 72, 153, 0.15));">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.security">Security</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 18, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                10 min read
+                            </span>
+                        </div>
+                        <h2><a href="online-poll-security.html" data-i18n="card.security.title">Online Poll Security: How to Prevent Vote Manipulation</a></h2>
+                        <p class="article-excerpt" data-i18n="card.security.excerpt">Real incidents of poll manipulation (TIME Magazine hack, debate poll brigading), prevention techniques backed by academic research, and a security checklist for your polls.</p>
+                        <a href="online-poll-security.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="online-poll-security" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="survey-response-rates">
+                    <div class="article-card-visual" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(236, 72, 153, 0.15));">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.research">Research</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 18, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span data-i18n="card.survey.readtime">12 min read</span>
+                            </span>
+                        </div>
+                        <h2><a href="survey-response-rates.html" data-i18n="card.survey.title">Survey Response Rates: What's Normal and How to Improve Yours</a></h2>
+                        <p class="article-excerpt" data-i18n="card.survey.excerpt">Industry benchmarks by channel (email, SMS, in-app), the Pew Research decline trend, and five evidence-based strategies to boost your response rates.</p>
+                        <a href="survey-response-rates.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="survey-response-rates" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="ranked-choice-voting-explained">
+                    <div class="article-card-visual" style="background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.15));">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.voting">Voting Methods</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 18, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                9 min read
+                            </span>
+                        </div>
+                        <h2><a href="ranked-choice-voting-explained.html" data-i18n="card.rcv.title">Ranked Choice Voting Explained: How It Works and When to Use It</a></h2>
+                        <p class="article-excerpt" data-i18n="card.rcv.excerpt">How ranked choice voting works, where it's used in real elections (Alaska, NYC, Maine), voter satisfaction data from FairVote, and when to use it in your own polls.</p>
+                        <a href="ranked-choice-voting-explained.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="ranked-choice-voting-explained" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="psychology-of-survey-questions">
+                    <div class="article-card-visual" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.15));">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.research">Research</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 18, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                <span data-i18n="card.psych.readtime">11 min read</span>
+                            </span>
+                        </div>
+                        <h2><a href="psychology-of-survey-questions.html" data-i18n="card.psych.title">The Psychology of Survey Questions: How Wording Affects Responses</a></h2>
+                        <p class="article-excerpt" data-i18n="card.psych.excerpt">How cognitive biases like anchoring, framing, and social desirability shape survey results. Includes Pew Research examples where question wording caused 25-point swings.</p>
+                        <a href="psychology-of-survey-questions.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="psychology-of-survey-questions" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="remote-team-decision-making">
+                    <div class="article-card-visual" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.2), rgba(236, 72, 153, 0.15));">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.workplace">Workplace</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 18, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                10 min read
+                            </span>
+                        </div>
+                        <h2><a href="remote-team-decision-making.html" data-i18n="card.remote.title">Remote Team Decision-Making: Using Polls to Build Consensus</a></h2>
+                        <p class="article-excerpt" data-i18n="card.remote.excerpt">Why only 11% of meetings are productive, how asynchronous polling saves time for distributed teams, and sourced data from Gallup, McKinsey, and Buffer on remote work.</p>
+                        <a href="remote-team-decision-making.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="remote-team-decision-making" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="how-to-create-online-poll">
+                    <div class="article-card-visual">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.guide">Guide</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 4, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                8 min read
+                            </span>
+                        </div>
+                        <h2><a href="how-to-create-online-poll.html" data-i18n="card.howto.title">How to Create an Online Poll: The Complete Guide</a></h2>
+                        <p class="article-excerpt" data-i18n="card.howto.excerpt">Everything you need to know about creating polls that people actually want to answer. Covers poll types, writing unbiased questions, distribution strategies, and how to analyze your results for real insights.</p>
+                        <a href="how-to-create-online-poll.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="how-to-create-online-poll" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+                <article class="article-card" data-article="employee-engagement-survey-questions">
+                    <div class="article-card-visual">
+                        <div class="icon-wrapper">
+                            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#ec4899" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                        </div>
+                    </div>
+                    <div class="article-card-body">
+                        <div class="article-meta">
+                            <span class="article-category" data-i18n="cat.hr">HR & Workplace</span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                Mar 1, 2026
+                            </span>
+                            <span class="article-meta-item">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                                10 min read
+                            </span>
+                        </div>
+                        <h2><a href="employee-engagement-survey-questions.html" data-i18n="card.employee.title">50 Employee Engagement Survey Questions That Actually Work</a></h2>
+                        <p class="article-excerpt" data-i18n="card.employee.excerpt">Ready-to-use survey questions organized by category: job satisfaction, communication, professional growth, management effectiveness, and company culture. Includes tips on anonymity, timing, and acting on the results.</p>
+                        <a href="employee-engagement-survey-questions.html" class="read-more" data-i18n="card.readmore">
+                            Read the full guide
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                        </a>
+                    </div>
+                    <div class="article-card-footer">
+                        <button class="vote-btn" data-article="employee-engagement-survey-questions" aria-label="Vote for this article">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3H14z"/><path d="M7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></svg>
+                            <span class="vote-count">0</span>
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-banner-inner">
+            <h2 data-i18n="cta.title">Create Your Own Poll for Free</h2>
+            <p data-i18n="cta.text">Build and share a poll in under 30 seconds. No sign-up required. Real-time results, anonymous voting, and embed support included.</p>
+            <a href="https://pollpixie.com" class="btn-primary" data-i18n="cta.btn">Get Started at Poll Pixie</a>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section style="padding:40px 20px;">
+        <div style="max-width:600px;margin:0 auto;padding:40px 24px;background:rgba(236,72,153,0.06);border:1px solid rgba(236,72,153,0.15);border-radius:16px;text-align:center;">
+            <h3 style="color:#ec4899;font-size:1.4rem;font-weight:700;margin:0 0 8px;" data-i18n="newsletter.title">Poll Insights Newsletter</h3>
+            <p style="color:#94a3b8;font-size:0.95rem;margin:0 0 20px;max-width:440px;margin-left:auto;margin-right:auto;" data-i18n="newsletter.desc">Survey research, polling trends, and data analysis tips delivered weekly.</p>
+            <form id="fpNewsletterForm" style="display:flex;gap:8px;max-width:440px;margin:0 auto;" onsubmit="return submitFPNewsletter(event)">
+                <input type="email" id="fpNewsletterEmail" placeholder="you@email.com" required style="flex:1;padding:12px 18px;border-radius:50px;border:1px solid rgba(236,72,153,0.25);background:rgba(0,0,0,0.25);color:#e2e8f0;font-size:0.9rem;outline:none;font-family:inherit;" onfocus="this.style.borderColor='#ec4899'" onblur="this.style.borderColor='rgba(236,72,153,0.25)'">
+                <button type="submit" style="padding:12px 24px;border-radius:50px;border:none;background:#ec4899;color:#fff;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;white-space:nowrap;transition:background 0.2s,transform 0.2s;" onmouseover="this.style.background='#db2777';this.style.transform='translateY(-1px)'" onmouseout="this.style.background='#ec4899';this.style.transform=''">Subscribe</button>
+            </form>
+            <div id="fpNewsletterMsg" style="margin-top:12px;font-size:0.85rem;min-height:20px;"></div>
+            <p style="margin-top:12px;font-size:0.75rem;color:#64748b;" data-i18n="newsletter.disclaimer">No spam. Unsubscribe anytime.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <a href="https://freepolls.org" class="footer-logo">Free Polls</a>
+            <p data-i18n="footer.tagline">The authority on online polling trends, research, and best practices.</p>
+            <ul class="footer-links">
+                <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+                <li><a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a></li>
+                <li><a href="https://pollpixie.com">Poll Pixie</a></li>
+                <li><a href="https://freepolls.org/privacy.html" data-i18n="footer.privacy">Privacy</a></li>
+                <li><a href="https://freepolls.org/terms.html" data-i18n="footer.terms">Terms</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+    window.TRANSLATIONS = {
+      es: {
+        'nav.home': 'Inicio',
+        'nav.blog': 'Blog',
+        'nav.cta': 'Crear una encuesta',
+        'hero.title': 'El blog de encuestas',
+        'hero.subtitle': 'Guias practicas sobre como crear encuestas efectivas, redactar mejores preguntas y convertir las respuestas en informacion real.',
+        'cat.security': 'Seguridad',
+        'cat.research': 'Investigacion',
+        'cat.voting': 'Metodos de votacion',
+        'cat.workplace': 'Trabajo',
+        'cat.guide': 'Guia',
+        'cat.hr': 'RRHH y Trabajo',
+        'card.security.title': 'Seguridad de encuestas en linea: como prevenir la manipulacion de votos',
+        'card.security.excerpt': 'Incidentes reales de manipulacion de encuestas (hackeo de TIME Magazine, brigading en encuestas de debates), tecnicas de prevencion respaldadas por investigacion academica y una lista de verificacion de seguridad para tus encuestas.',
+        'card.survey.title': 'Tasas de respuesta de encuestas: que es normal y como mejorar la tuya',
+        'card.survey.excerpt': 'Puntos de referencia de la industria por canal (email, SMS, in-app), la tendencia de declive de Pew Research y cinco estrategias basadas en evidencia para mejorar tus tasas de respuesta.',
+        'card.survey.readtime': '12 min de lectura',
+        'card.rcv.title': 'Votacion por orden de preferencia: como funciona y cuando usarla',
+        'card.rcv.excerpt': 'Como funciona la votacion por orden de preferencia, donde se usa en elecciones reales (Alaska, NYC, Maine), datos de satisfaccion de votantes de FairVote y cuando usarla en tus propias encuestas.',
+        'card.psych.title': 'La psicologia de las preguntas de encuestas: como la redaccion afecta las respuestas',
+        'card.psych.excerpt': 'Como los sesgos cognitivos como el anclaje, el encuadre y la deseabilidad social moldean los resultados de encuestas. Incluye ejemplos de Pew Research donde la redaccion de preguntas causo diferencias de 25 puntos.',
+        'card.psych.readtime': '11 min de lectura',
+        'card.remote.title': 'Toma de decisiones en equipos remotos: usar encuestas para construir consenso',
+        'card.remote.excerpt': 'Por que solo el 11% de las reuniones son productivas, como las encuestas asincronas ahorran tiempo a los equipos distribuidos, y datos de Gallup, McKinsey y Buffer sobre trabajo remoto.',
+        'card.howto.title': 'Como crear una encuesta en linea: La guia completa',
+        'card.howto.excerpt': 'Todo lo que necesitas saber sobre crear encuestas que la gente realmente quiera responder. Cubre tipos de encuestas, redaccion de preguntas imparciales, estrategias de distribucion y como analizar tus resultados para obtener informacion real.',
+        'card.employee.title': '50 preguntas de encuestas de compromiso laboral que realmente funcionan',
+        'card.employee.excerpt': 'Preguntas listas para usar organizadas por categoria: satisfaccion laboral, comunicacion, crecimiento profesional, efectividad de gestion y cultura empresarial. Incluye consejos sobre anonimato, momento oportuno y como actuar sobre los resultados.',
+        'card.readmore': 'Leer la guia completa',
+        'cta.title': 'Crea tu propia encuesta gratis',
+        'cta.text': 'Crea y comparte una encuesta en menos de 30 segundos. Sin registro necesario. Resultados en tiempo real, votacion anonima y soporte para integracion incluidos.',
+        'cta.btn': 'Comenzar en Poll Pixie',
+        'newsletter.title': 'Boletin de perspectivas de encuestas',
+        'newsletter.desc': 'Investigacion sobre encuestas, tendencias de sondeos y consejos de analisis de datos entregados semanalmente.',
+        'newsletter.disclaimer': 'Sin spam. Cancela cuando quieras.',
+        'footer.tagline': 'La autoridad en tendencias, investigacion y mejores practicas de encuestas en linea.',
+        'footer.privacy': 'Privacidad',
+        'footer.terms': 'Terminos'
+      }
+    };
+    </script>
+    <script src="../i18n.js"></script>
+
+    <script>
+    (function() {
+        var API_BASE = 'https://api.terrellflautt.com';
+        var STORAGE_KEY = 'freepolls_user_id';
+        var voteCounts = {};
+        var userVotedArticles = [];
+        var isVoting = false;
+
+        function setCookie(n, v, d) { document.cookie = n + '=' + encodeURIComponent(v) + ';expires=' + new Date(Date.now() + d * 864e5).toUTCString() + ';path=/;SameSite=Lax'; }
+        function getCookie(n) { var m = document.cookie.match(new RegExp('(?:^|; )' + n + '=([^;]*)')); return m ? decodeURIComponent(m[1]) : null; }
+        function getUserId() {
+            var id = getCookie(STORAGE_KEY) || localStorage.getItem(STORAGE_KEY);
+            if (!id) {
+                id = 'fp_' + Date.now().toString(36) + '_' + Math.random().toString(36).substring(2, 10);
+            }
+            localStorage.setItem(STORAGE_KEY, id);
+            setCookie(STORAGE_KEY, id, 365);
+            return id;
+        }
+
+        function updateButtonUI(slug, count, voted) {
+            var btn = document.querySelector('.vote-btn[data-article="' + slug + '"]');
+            if (!btn) return;
+            var countEl = btn.querySelector('.vote-count');
+            if (countEl) countEl.textContent = count;
+            if (voted) {
+                btn.classList.add('voted');
+                btn.setAttribute('aria-label', 'Remove vote from this article');
+            } else {
+                btn.classList.remove('voted');
+                btn.setAttribute('aria-label', 'Vote for this article');
+            }
+        }
+
+        function sortArticlesByVotes() {
+            var grid = document.querySelector('.articles-grid');
+            if (!grid) return;
+            var cards = Array.prototype.slice.call(grid.querySelectorAll('.article-card'));
+            cards.sort(function(a, b) {
+                var slugA = a.getAttribute('data-article');
+                var slugB = b.getAttribute('data-article');
+                var countA = voteCounts[slugA] || 0;
+                var countB = voteCounts[slugB] || 0;
+                return countB - countA;
+            });
+            cards.forEach(function(card) {
+                grid.appendChild(card);
+            });
+        }
+
+        function fetchInitialData() {
+            var userId = getUserId();
+
+            // Fetch all vote counts
+            fetch(API_BASE + '/vote')
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    voteCounts = data.voteCounts || {};
+                    Object.keys(voteCounts).forEach(function(slug) {
+                        updateButtonUI(slug, voteCounts[slug], userVotedArticles.indexOf(slug) !== -1);
+                    });
+                    sortArticlesByVotes();
+                })
+                .catch(function() {});
+
+            // Fetch user vote status
+            fetch(API_BASE + '/vote/status/' + userId)
+                .then(function(res) { return res.json(); })
+                .then(function(data) {
+                    userVotedArticles = data.votedProjects || [];
+                    userVotedArticles.forEach(function(slug) {
+                        var currentCount = voteCounts[slug] || 0;
+                        updateButtonUI(slug, currentCount, true);
+                    });
+                })
+                .catch(function() {});
+        }
+
+        function handleVoteClick(e) {
+            var btn = e.currentTarget;
+            var slug = btn.getAttribute('data-article');
+            if (!slug || isVoting) return;
+            isVoting = true;
+
+            var userId = getUserId();
+            var currentlyVoted = btn.classList.contains('voted');
+            var countEl = btn.querySelector('.vote-count');
+            var currentCount = parseInt(countEl.textContent, 10) || 0;
+
+            // Optimistic UI
+            var newCount = currentlyVoted ? Math.max(0, currentCount - 1) : currentCount + 1;
+            var newVoted = !currentlyVoted;
+            updateButtonUI(slug, newCount, newVoted);
+            voteCounts[slug] = newCount;
+            sortArticlesByVotes();
+
+            fetch(API_BASE + '/vote', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ projectId: slug, userId: userId })
+            })
+            .then(function(res) { return res.json(); })
+            .then(function(data) {
+                // Server is source of truth
+                voteCounts[slug] = data.count;
+                updateButtonUI(slug, data.count, data.voted);
+                if (data.voted) {
+                    if (userVotedArticles.indexOf(slug) === -1) userVotedArticles.push(slug);
+                } else {
+                    var idx = userVotedArticles.indexOf(slug);
+                    if (idx !== -1) userVotedArticles.splice(idx, 1);
+                }
+                sortArticlesByVotes();
+            })
+            .catch(function() {
+                // Revert optimistic UI on error
+                updateButtonUI(slug, currentCount, currentlyVoted);
+                voteCounts[slug] = currentCount;
+                sortArticlesByVotes();
+            })
+            .finally(function() {
+                isVoting = false;
+            });
+        }
+
+        // Bind click handlers
+        var buttons = document.querySelectorAll('.vote-btn');
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener('click', handleVoteClick);
+        }
+
+        fetchInitialData();
+    })();
+    </script>
+
+<script>
+function submitFPNewsletter(e) {
+    e.preventDefault();
+    var input = document.getElementById('fpNewsletterEmail');
+    var msg = document.getElementById('fpNewsletterMsg');
+    var email = input.value.trim();
+    if (!email) return false;
+    msg.textContent = 'Subscribing...';
+    msg.style.color = '#94a3b8';
+    fetch('https://api.terrellflautt.com/newsletter/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, source: 'freepolls.org' })
+    }).then(function(r) { return r.json(); }).then(function(data) {
+        if (data.error) { msg.textContent = data.error; msg.style.color = '#ef4444'; }
+        else { msg.textContent = data.message; msg.style.color = '#10b981'; input.value = ''; }
+    }).catch(function() { msg.textContent = 'Something went wrong. Please try again.'; msg.style.color = '#ef4444'; });
+    return false;
+}
+</script>
+</body>
+</html>

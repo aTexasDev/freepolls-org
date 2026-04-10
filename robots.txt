@@ -1,0 +1,11 @@
+# FreePolls.org
+# https://freepolls.org
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://freepolls.org/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

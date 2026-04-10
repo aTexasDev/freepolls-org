@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranked Choice Voting Explained: How It Works and When to Use It | Free Polls</title>
+    <meta name="description" content="Learn how ranked choice voting works, where it's used in the US, voter satisfaction data, turnout impact, and the pros and cons. Plus: how to run RCV in your own polls.">
+    <meta name="keywords" content="ranked choice voting, RCV, instant runoff voting, how ranked choice voting works, ranked choice voting pros cons, ranked choice voting explained">
+    <link rel="canonical" href="https://freepolls.org/blog/ranked-choice-voting-explained.html">
+
+    <meta property="og:title" content="Ranked Choice Voting Explained: How It Works and When to Use It">
+    <meta property="og:description" content="A complete guide to ranked choice voting: mechanics, where it's used, voter satisfaction data, turnout impact, pros and cons, and how to use RCV in your own polls.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://freepolls.org/blog/ranked-choice-voting-explained.html">
+    <meta property="og:site_name" content="Free Polls">
+    <meta property="article:published_time" content="2026-03-18">
+    <meta property="article:modified_time" content="2026-03-18">
+    <meta property="article:section" content="Voting Methods">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Ranked Choice Voting Explained: How It Works and When to Use It">
+    <meta name="twitter:description" content="How ranked choice voting works, where it's used, voter satisfaction stats, and when to use RCV in your own polls.">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "headline": "Ranked Choice Voting Explained: How It Works and When to Use It",
+        "description": "A complete guide to ranked choice voting: mechanics, where it's used, voter satisfaction data, turnout impact, pros and cons, and how to use RCV in your own polls.",
+        "url": "https://freepolls.org/blog/ranked-choice-voting-explained.html",
+        "datePublished": "2026-03-18",
+        "dateModified": "2026-03-18",
+        "author": {
+            "@type": "Organization",
+            "name": "Free Polls",
+            "url": "https://freepolls.org"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Free Polls",
+            "url": "https://freepolls.org"
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://freepolls.org/blog/ranked-choice-voting-explained.html"
+        },
+        "wordCount": 2500,
+        "timeRequired": "PT9M"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://freepolls.org" },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://freepolls.org/blog/" },
+            { "@type": "ListItem", "position": 3, "name": "Ranked Choice Voting Explained" }
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: #16161f;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --accent-primary: #ec4899;
+            --accent-secondary: #ec4899;
+            --accent-tertiary: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.7;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(10, 10, 15, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .header-cta {
+            padding: 10px 24px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .header-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            padding: 100px 24px 0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb ol {
+            list-style: none;
+            display: flex;
+            gap: 8px;
+            font-size: 0.85rem;
+        }
+
+        .breadcrumb li + li::before {
+            content: '/';
+            margin-right: 8px;
+            color: var(--text-muted);
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-primary);
+        }
+
+        .breadcrumb li:last-child {
+            color: var(--text-secondary);
+        }
+
+        /* Article */
+        .article-header {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 24px 0;
+        }
+
+        .article-category-tag {
+            display: inline-block;
+            padding: 5px 14px;
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .article-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #d4d4d8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .article-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding-bottom: 32px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 48px;
+        }
+
+        .article-meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Article Body */
+        .article-body {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+        }
+
+        .article-body h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 56px 0 20px;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        .article-body h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 40px 0 14px;
+            color: var(--text-primary);
+        }
+
+        .article-body p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+        }
+
+        .article-body ul,
+        .article-body ol {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin-bottom: 20px;
+            padding-left: 24px;
+        }
+
+        .article-body li {
+            margin-bottom: 8px;
+        }
+
+        .article-body strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .article-body a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(236, 72, 153, 0.3);
+            transition: border-color 0.2s;
+        }
+
+        .article-body a:hover {
+            border-color: var(--accent-primary);
+        }
+
+        /* Callout boxes */
+        .callout {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-primary);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin: 32px 0;
+        }
+
+        .callout.tip {
+            border-left-color: var(--success);
+        }
+
+        .callout.warning {
+            border-left-color: var(--warning);
+        }
+
+        .callout-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+            color: var(--accent-primary);
+        }
+
+        .callout.tip .callout-title { color: var(--success); }
+        .callout.warning .callout-title { color: var(--warning); }
+
+        .callout p {
+            margin-bottom: 0;
+            font-size: 0.98rem;
+        }
+
+        /* Comparison table */
+        .poll-type-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0 32px;
+            font-size: 0.95rem;
+        }
+
+        .poll-type-table th,
+        .poll-type-table td {
+            padding: 14px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .poll-type-table th {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .poll-type-table td {
+            color: var(--text-secondary);
+        }
+
+        .poll-type-table tbody tr:hover {
+            background: var(--bg-card);
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin-bottom: 48px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .toc ol {
+            list-style: none;
+            padding: 0;
+            counter-reset: toc-counter;
+        }
+
+        .toc li {
+            counter-increment: toc-counter;
+            margin-bottom: 10px;
+        }
+
+        .toc li::before {
+            content: counter(toc-counter) ".";
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+            border-bottom: none;
+        }
+
+        .toc a:hover {
+            color: var(--accent-primary);
+        }
+
+        /* CTA */
+        .article-cta {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.1), rgba(236, 72, 153, 0.08));
+            border: 1px solid rgba(236, 72, 153, 0.25);
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            margin: 48px 0;
+        }
+
+        .article-cta h3 {
+            margin-top: 0;
+            font-size: 1.5rem;
+        }
+
+        .article-cta p {
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 30px rgba(236, 72, 153, 0.3);
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(236, 72, 153, 0.4);
+        }
+
+        /* Related Articles */
+        .related-articles {
+            padding: 60px 24px 80px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+        }
+
+        .related-articles h2 {
+            text-align: center;
+            font-size: 1.5rem;
+            margin-bottom: 32px;
+        }
+
+        .related-card {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            transition: all 0.3s;
+        }
+
+        .related-card:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-3px);
+        }
+
+        .related-card h3 {
+            margin-bottom: 8px;
+        }
+
+        .related-card h3 a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.15rem;
+            transition: color 0.2s;
+        }
+
+        .related-card h3 a:hover {
+            color: var(--accent-primary);
+        }
+
+        .related-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 24px;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-size: 1.3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Mobile Nav */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 8px;
+            z-index: 110;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(10, 10, 15, 0.97);
+            backdrop-filter: blur(20px);
+            z-index: 105;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 32px;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--accent-primary);
+        }
+
+        .mobile-nav .mobile-cta {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 10px;
+            font-weight: 700;
+        }
+
+        /* Steps visual */
+        .rcv-steps {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 28px 32px;
+            margin: 24px 0 32px;
+        }
+
+        .rcv-step {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 20px;
+            align-items: flex-start;
+        }
+
+        .rcv-step:last-child {
+            margin-bottom: 0;
+        }
+
+        .rcv-step-number {
+            flex-shrink: 0;
+            width: 32px;
+            height: 32px;
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--accent-primary);
+            margin-top: 2px;
+        }
+
+        .rcv-step-text {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        .rcv-step-text strong {
+            color: var(--text-primary);
+        }
+
+        /* Mobile */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .article-header h1 { font-size: 2rem; }
+            .article-body h2 { font-size: 1.4rem; }
+            .article-cta { padding: 28px 20px; }
+            .article-meta { flex-wrap: wrap; gap: 12px; }
+
+            .poll-type-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .breadcrumb { padding-top: 85px; }
+            .article-header { padding-top: 24px; }
+            .article-header h1 { font-size: 1.7rem; }
+            .article-body { padding: 0 16px 60px; }
+            .toc { padding: 20px 22px; }
+            .rcv-steps { padding: 20px 22px; }
+        }
+    </style>
+    <script>window.SNAPIT_TRACKING_ID='SA_4b49a2e2ab3f';</script>
+    <script src="https://snapitanalytics.com/analytics.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="https://freepolls.org" class="logo">Free Polls</a>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+                    <li><a href="https://freepolls.org/blog/" class="active" data-i18n="nav.blog">Blog</a></li>
+                    <li><a href="https://pollpixie.com" class="header-cta" data-i18n="nav.cta">Create a Poll</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-menu-btn" aria-label="Open menu" onclick="document.querySelector('.mobile-nav').classList.toggle('open');">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+        <a href="https://freepolls.org" data-i18n="nav.home">Home</a>
+        <a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a>
+        <a href="https://pollpixie.com" class="mobile-cta" data-i18n="nav.cta">Create a Poll</a>
+        <button style="position:absolute;top:20px;right:24px;background:none;border:none;color:var(--text-primary);cursor:pointer;padding:8px;" aria-label="Close menu" onclick="document.querySelector('.mobile-nav').classList.remove('open');">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+    </nav>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+            <li><a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a></li>
+            <li data-i18n="breadcrumb">Ranked Choice Voting Explained</li>
+        </ol>
+    </nav>
+
+    <header class="article-header">
+        <span class="article-category-tag" data-i18n="category">Voting Methods</span>
+        <h1 data-i18n="title">Ranked Choice Voting Explained: How It Works and When to Use It</h1>
+        <p class="subtitle" data-i18n="subtitle">A data-driven look at ranked choice voting -- how ballots are counted, where it is already in use, what voters actually think of it, and when it makes sense for your own polls and decisions.</p>
+        <div class="article-meta">
+            <span class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                Published Mar 18, 2026
+            </span>
+            <span class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span data-i18n="meta.readtime">9 min read</span>
+            </span>
+        </div>
+    </header>
+
+    <article class="article-body">
+
+        <nav class="toc">
+            <div class="toc-title" data-i18n="toc.title">In This Article</div>
+            <ol>
+                <li><a href="#what-is-rcv" data-i18n="toc.1">What Is Ranked Choice Voting?</a></li>
+                <li><a href="#how-it-works" data-i18n="toc.2">How RCV Counting Works, Step by Step</a></li>
+                <li><a href="#where-used" data-i18n="toc.3">Where Ranked Choice Voting Is Used Today</a></li>
+                <li><a href="#voter-satisfaction" data-i18n="toc.4">What Voters Actually Think of RCV</a></li>
+                <li><a href="#turnout" data-i18n="toc.5">Does RCV Affect Voter Turnout?</a></li>
+                <li><a href="#pros-cons" data-i18n="toc.6">Pros and Cons of Ranked Choice Voting</a></li>
+                <li><a href="#use-rcv" data-i18n="toc.7">How to Use RCV in Your Own Polls</a></li>
+            </ol>
+        </nav>
+
+        <p data-i18n="intro.p1">Ranked choice voting (RCV) -- also called instant runoff voting -- is reshaping elections across the United States. Instead of picking a single candidate, voters rank their choices in order of preference. If no one wins an outright majority, the weakest candidate is eliminated and their voters' second choices are redistributed, continuing until someone crosses the 50% threshold.</p>
+
+        <p data-i18n="intro.p2">The concept is straightforward, but the implications are significant. RCV changes how campaigns are run, how voters express their preferences, and how winners are determined. This article covers the mechanics, the data on voter satisfaction and turnout, and the honest trade-offs -- plus how you can apply ranked choice logic to your own polls and group decisions.</p>
+
+        <h2 id="what-is-rcv" data-i18n="s1.title">1. What Is Ranked Choice Voting?</h2>
+
+        <p data-i18n="s1.p1">In a traditional plurality election, each voter picks one candidate. The candidate with the most votes wins, even if that means winning with 30% support while 70% of voters preferred someone else. Ranked choice voting addresses this problem by letting voters express a fuller picture of their preferences.</p>
+
+        <p data-i18n="s1.p2">According to the <a href="https://www.csg.org/2023/03/21/ranked-choice-voting-what-where-why-why-not/" target="_blank" rel="noopener">Council of State Governments</a>, RCV allows voters to rank candidates in order of preference -- first choice, second choice, third choice, and so on. If a voter's top-ranked candidate is eliminated, their vote transfers to their next-ranked candidate, ensuring their voice still counts in the final outcome.</p>
+
+        <p data-i18n="s1.p3">The core idea: <strong>the winner should be the candidate acceptable to the broadest group of voters</strong>, not just the one with the most passionate minority.</p>
+
+        <h2 id="how-it-works" data-i18n="s2.title">2. How RCV Counting Works, Step by Step</h2>
+
+        <p data-i18n="s2.p1">The counting process is often called "instant runoff" because it simulates multiple rounds of runoff elections in a single ballot. Here is how it works:</p>
+
+        <div class="rcv-steps">
+            <div class="rcv-step">
+                <div class="rcv-step-number">1</div>
+                <div class="rcv-step-text" data-i18n="s2.step1"><strong>First-choice votes are counted.</strong> Every ballot is sorted by the voter's first-choice candidate. If any candidate receives more than 50% of the first-choice votes, they win outright. Done.</div>
+            </div>
+            <div class="rcv-step">
+                <div class="rcv-step-number">2</div>
+                <div class="rcv-step-text" data-i18n="s2.step2"><strong>The last-place candidate is eliminated.</strong> If no one has a majority, the candidate with the fewest first-choice votes is removed from the race.</div>
+            </div>
+            <div class="rcv-step">
+                <div class="rcv-step-number">3</div>
+                <div class="rcv-step-text" data-i18n="s2.step3"><strong>Votes are redistributed.</strong> Voters who ranked the eliminated candidate first now have their ballots transferred to their second-choice candidate.</div>
+            </div>
+            <div class="rcv-step">
+                <div class="rcv-step-number">4</div>
+                <div class="rcv-step-text" data-i18n="s2.step4"><strong>Repeat until a majority winner emerges.</strong> Steps 2 and 3 continue -- eliminating the lowest candidate and redistributing votes each round -- until one candidate holds more than 50% of the active ballots.</div>
+            </div>
+        </div>
+
+        <div class="callout tip">
+            <div class="callout-title" data-i18n="s2.callout.title">Key Point</div>
+            <p data-i18n="s2.callout.text">Voters are never required to rank every candidate. You can rank as many or as few as you want. If all of your ranked candidates are eliminated, your ballot is considered "exhausted" and is no longer counted in subsequent rounds.</p>
+        </div>
+
+        <h2 id="where-used" data-i18n="s3.title">3. Where Ranked Choice Voting Is Used Today</h2>
+
+        <p data-i18n="s3.p1">RCV is no longer an experiment. It is used in major elections across multiple states and dozens of cities. Here is the current landscape:</p>
+
+        <table class="poll-type-table">
+            <thead>
+                <tr>
+                    <th>Jurisdiction</th>
+                    <th>Scope</th>
+                    <th>Since</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Maine</strong></td>
+                    <td>Congressional and presidential elections</td>
+                    <td>2018</td>
+                    <td>First state to adopt RCV for federal elections</td>
+                </tr>
+                <tr>
+                    <td><strong>Alaska</strong></td>
+                    <td>State, congressional, and presidential general elections</td>
+                    <td>2022</td>
+                    <td>Survived a <a href="https://news.ballotpedia.org/2026/01/07/alaska-voters-to-consider-ranked-choice-voting-repeal-initiative-in-2026-after-narrowest-defeat-in-state-history-in-2024/" target="_blank" rel="noopener">2024 repeal attempt</a> by the narrowest margin in state history</td>
+                </tr>
+                <tr>
+                    <td><strong>Washington, D.C.</strong></td>
+                    <td>All elections</td>
+                    <td>2025</td>
+                    <td>Approved by voters via Initiative 83 in 2024</td>
+                </tr>
+                <tr>
+                    <td><strong>New York City</strong></td>
+                    <td>City primary and special elections</td>
+                    <td>2021</td>
+                    <td>Largest U.S. city using RCV; first used in June 2021 mayoral primary</td>
+                </tr>
+                <tr>
+                    <td><strong>50+ municipalities</strong></td>
+                    <td>Local elections</td>
+                    <td>Various</td>
+                    <td>Includes Minneapolis, San Francisco, Santa Fe, and others</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p data-i18n="s3.p2">The Alaska story is particularly notable. In 2024, a ballot measure to repeal RCV <a href="https://news.ballotpedia.org/2026/01/07/alaska-voters-to-consider-ranked-choice-voting-repeal-initiative-in-2026-after-narrowest-defeat-in-state-history-in-2024/" target="_blank" rel="noopener">failed by the narrowest margin in the state's history</a>, showing just how divisive -- and closely watched -- the RCV debate has become.</p>
+
+        <h2 id="voter-satisfaction" data-i18n="s4.title">4. What Voters Actually Think of RCV</h2>
+
+        <p data-i18n="s4.p1">One of the most common criticisms of ranked choice voting is that it confuses voters. The data tells a different story.</p>
+
+        <h3 data-i18n="s4.h3a">Santa Fe, New Mexico (2018)</h3>
+        <p data-i18n="s4.p2">According to <a href="https://fairvote.org/resources/data-on-rcv/" target="_blank" rel="noopener">FairVote's data on RCV elections</a>, exit polls in Santa Fe's 2018 ranked choice election found that <strong>94% of voters were satisfied with the RCV experience</strong>, and <strong>71% said they wanted to use ranked choice voting again</strong> in future elections.</p>
+
+        <h3 data-i18n="s4.h3b">New York City (2021)</h3>
+        <p data-i18n="s4.p3">NYC's first ranked choice primary in June 2021 was the largest test of RCV in U.S. history. According to <a href="https://fairvote.org/resources/data-on-rcv/" target="_blank" rel="noopener">post-election survey data compiled by FairVote</a>:</p>
+        <ul>
+            <li data-i18n="s4.li1"><strong>More than 90% of voters</strong> found the ranked choice ballot "simple to complete"</li>
+            <li data-i18n="s4.li2"><strong>77% said they wanted to use RCV again</strong> in future elections</li>
+            <li data-i18n="s4.li3"><strong>Only 16% reported feeling confused</strong> by the ranking process</li>
+        </ul>
+
+        <p data-i18n="s4.p4">These numbers are especially striking given that NYC's 2021 primary involved a crowded field of 13 mayoral candidates -- hardly a simple ballot by any measure.</p>
+
+        <div class="callout">
+            <div class="callout-title" data-i18n="s4.callout.title">Context</div>
+            <p data-i18n="s4.callout.text">Satisfaction rates above 90% are unusually high for any change to election procedures. For comparison, new voter ID laws, ballot redesigns, and polling location changes typically generate significantly more voter frustration.</p>
+        </div>
+
+        <h2 id="turnout" data-i18n="s5.title">5. Does RCV Affect Voter Turnout?</h2>
+
+        <p data-i18n="s5.p1">One of the strongest arguments for ranked choice voting is its potential to improve voter participation -- particularly by eliminating low-turnout runoff elections.</p>
+
+        <p data-i18n="s5.p2">According to <a href="https://fairvote.org/ranked-choice-voting-and-voter-turnout/" target="_blank" rel="noopener">FairVote's research on RCV and turnout</a>, traditional two-round runoff elections see a <strong>median 37% decline in voter turnout</strong> between the first round and the runoff. That means more than a third of voters who showed up for the initial election do not come back for the decisive one -- the election that actually determines the winner.</p>
+
+        <p data-i18n="s5.p3">RCV eliminates this problem by consolidating the process into a single election. Every voter's preferences are captured on one ballot, on one day.</p>
+
+        <p data-i18n="s5.p4">The data from cities using RCV supports this. <strong>Minneapolis saw a 9.6 percentage point increase in voter turnout</strong> after adopting ranked choice voting, according to <a href="https://fairvote.org/ranked-choice-voting-and-voter-turnout/" target="_blank" rel="noopener">FairVote's turnout analysis</a>. While turnout is affected by many factors -- candidate excitement, weather, national political climate -- the pattern of stable or increased participation under RCV is consistent across jurisdictions.</p>
+
+        <div class="callout tip">
+            <div class="callout-title" data-i18n="s5.callout.title">Why This Matters</div>
+            <p data-i18n="s5.callout.text">When a runoff drops 37% of voters, the winner is being chosen by a smaller, less representative group. RCV keeps more voters in the process through the final decision, producing outcomes that better reflect the full electorate.</p>
+        </div>
+
+        <h2 id="pros-cons" data-i18n="s6.title">6. Pros and Cons of Ranked Choice Voting</h2>
+
+        <p data-i18n="s6.p1">RCV is not without trade-offs. Here is an honest assessment based on reporting from <a href="https://www.britannica.com/procon/ranked-choice-voting-debate" target="_blank" rel="noopener">Britannica ProCon</a> and the <a href="https://www.americanbar.org/groups/public_interest/election_law/american-democracy/our-work/what-we-know-about-ranked-choice-voting-2025/" target="_blank" rel="noopener">American Bar Association's 2025 analysis</a>.</p>
+
+        <h3 data-i18n="s6.h3a">Arguments in favor</h3>
+        <ul>
+            <li data-i18n="s6.pro1"><strong>Majority winners.</strong> RCV ensures the winner has broad support, not just a plurality. In a five-way race under traditional rules, a candidate could win with 21% of the vote. Under RCV, the winner must eventually earn over 50% of active ballots.</li>
+            <li data-i18n="s6.pro2"><strong>Eliminates the spoiler effect.</strong> Third-party and independent candidates can run without being blamed for "splitting the vote." Voters can rank a minor-party candidate first and a major-party candidate second without fear of wasting their vote.</li>
+            <li data-i18n="s6.pro3"><strong>Reduces negative campaigning.</strong> Candidates have an incentive to appeal to their opponents' supporters for second-choice rankings. Research from the <a href="https://www.americanbar.org/groups/public_interest/election_law/american-democracy/our-work/what-we-know-about-ranked-choice-voting-2025/" target="_blank" rel="noopener">American Bar Association</a> confirms that RCV elections tend to feature less negative advertising and more policy-focused campaigns.</li>
+            <li data-i18n="s6.pro4"><strong>Saves money.</strong> By eliminating separate runoff elections, cities and states avoid the cost of running a second election. NYC estimated savings of $20 million per election cycle by consolidating primaries and runoffs.</li>
+            <li data-i18n="s6.pro5"><strong>Higher turnout.</strong> As discussed above, RCV avoids the dramatic turnout drop-off that plagues traditional runoff elections.</li>
+        </ul>
+
+        <h3 data-i18n="s6.h3b">Arguments against</h3>
+        <ul>
+            <li data-i18n="s6.con1"><strong>Complexity.</strong> While most voters report finding RCV simple, the counting process is harder to follow in real-time. Multi-round tabulation takes longer than a simple plurality count, and results cannot always be announced on election night.</li>
+            <li data-i18n="s6.con2"><strong>Ballot exhaustion.</strong> If a voter only ranks two candidates and both are eliminated, their ballot is exhausted -- it no longer counts. Critics argue this means the eventual winner may not truly have majority support of <em>all</em> voters who cast ballots, only of those whose ballots remained active. According to <a href="https://www.britannica.com/procon/ranked-choice-voting-debate" target="_blank" rel="noopener">Britannica ProCon</a>, this is one of the most debated aspects of RCV.</li>
+            <li data-i18n="s6.con3"><strong>Implementation costs.</strong> Upgrading voting equipment, retraining poll workers, and running voter education campaigns require upfront investment -- though these costs are typically offset by eliminating runoff elections over time.</li>
+            <li data-i18n="s6.con4"><strong>Potential for monotonicity violations.</strong> In rare cases, ranking a candidate higher can theoretically cause them to lose, or ranking them lower can help them win. While this is mathematically possible, documented real-world occurrences are extremely rare.</li>
+            <li data-i18n="s6.con5"><strong>Political resistance.</strong> Incumbents and major parties sometimes oppose RCV because it benefits challengers and third-party candidates. This has led to repeal efforts in several jurisdictions.</li>
+        </ul>
+
+        <div class="callout warning">
+            <div class="callout-title" data-i18n="s6.callout.title">The Bottom Line</div>
+            <p data-i18n="s6.callout.text">No voting system is perfect -- every method involves trade-offs between simplicity, expressiveness, and strategic resistance. RCV trades some counting simplicity for a more nuanced expression of voter preferences and broader winner legitimacy.</p>
+        </div>
+
+        <h2 id="use-rcv" data-i18n="s7.title">7. How to Use RCV in Your Own Polls</h2>
+
+        <p data-i18n="s7.p1">Ranked choice voting is not just for government elections. The same logic applies anytime a group needs to make a decision among multiple options and you want the outcome to reflect broad consensus rather than plurality rule.</p>
+
+        <h3 data-i18n="s7.h3a">When RCV makes sense</h3>
+        <ul>
+            <li data-i18n="s7.use1"><strong>Team elections and board votes.</strong> Choosing a team lead, committee chair, or board member from a field of three or more candidates.</li>
+            <li data-i18n="s7.use2"><strong>Prioritization decisions.</strong> Ranking product features, project ideas, or budget allocations by group priority.</li>
+            <li data-i18n="s7.use3"><strong>Event planning.</strong> Picking a venue, date, or theme when there are many options and no clear favorite.</li>
+            <li data-i18n="s7.use4"><strong>Multi-option decisions with no clear majority.</strong> Any scenario where a simple plurality vote might produce a winner that most people did not actually prefer.</li>
+        </ul>
+
+        <h3 data-i18n="s7.h3b">When to stick with simple voting</h3>
+        <ul>
+            <li data-i18n="s7.simple1"><strong>Binary decisions.</strong> Yes/no questions do not benefit from ranking.</li>
+            <li data-i18n="s7.simple2"><strong>Two options.</strong> With only two choices, RCV is identical to a standard vote.</li>
+            <li data-i18n="s7.simple3"><strong>Low-stakes or time-sensitive decisions.</strong> If you just need a quick answer and the stakes are low, a simple poll is faster and easier for everyone.</li>
+        </ul>
+
+        <h3 data-i18n="s7.h3c">Running an RCV poll</h3>
+        <p data-i18n="s7.p2"><a href="https://pollpixie.com">Poll Pixie</a> supports ranked choice polls, making it straightforward to create an RCV-style vote for your team, organization, or community. Set up your options, share the link, and let respondents drag-and-drop their rankings. The system handles the instant runoff tabulation automatically and shows you results round by round.</p>
+
+        <div class="callout tip">
+            <div class="callout-title" data-i18n="s7.callout.title">Best Practice</div>
+            <p data-i18n="s7.callout.text">When running an RCV poll, tell participants upfront how the counting works. A one-sentence explanation -- "Rank your choices in order of preference; if your top pick is eliminated, your vote transfers to your next choice" -- is usually enough to eliminate confusion.</p>
+        </div>
+
+        <div class="article-cta">
+            <h3 data-i18n="cta.title">Run a Ranked Choice Poll</h3>
+            <p data-i18n="cta.text">Poll Pixie makes ranked choice voting easy. Create a poll, share the link, and get results with automatic instant runoff tabulation.</p>
+            <a href="https://pollpixie.com" class="btn-primary" data-i18n="cta.btn">Create a Free RCV Poll</a>
+        </div>
+
+    </article>
+
+    <section class="related-articles">
+        <h2 data-i18n="related.title">Continue Reading</h2>
+        <div class="related-card">
+            <h3><a href="how-to-create-online-poll.html" data-i18n="related.1.title">How to Create an Online Poll: The Complete Guide</a></h3>
+            <p data-i18n="related.1.desc">A practical, step-by-step walkthrough for building polls that people actually want to answer -- covering types, question writing, sharing strategies, and result analysis.</p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <a href="https://freepolls.org" class="footer-logo">Free Polls</a>
+        <p data-i18n="footer.tagline">The authority on online polling trends, research, and best practices.</p>
+        <ul class="footer-links">
+            <li><a href="https://freepolls.org" data-i18n="nav.home">Home</a></li>
+            <li><a href="https://freepolls.org/blog/" data-i18n="nav.blog">Blog</a></li>
+            <li><a href="https://pollpixie.com">Poll Pixie</a></li>
+            <li><a href="https://freepolls.org/privacy.html" data-i18n="footer.privacy">Privacy</a></li>
+            <li><a href="https://freepolls.org/terms.html" data-i18n="footer.terms">Terms</a></li>
+        </ul>
+    </footer>
+
+
+    <script>
+    window.TRANSLATIONS = {
+      es: {
+        'nav.home': 'Inicio',
+        'nav.blog': 'Blog',
+        'nav.cta': 'Crear una encuesta',
+        'breadcrumb': 'Votacion por orden de preferencia',
+        'category': 'Metodos de votacion',
+        'title': 'Votacion por orden de preferencia: como funciona y cuando usarla',
+        'subtitle': 'Un analisis basado en datos sobre la votacion por orden de preferencia: como se cuentan las papeletas, donde ya se usa, que opinan realmente los votantes, y cuando tiene sentido para tus propias encuestas y decisiones.',
+        'meta.readtime': '9 min de lectura',
+        'toc.title': 'En este articulo',
+        'toc.1': '\u00bfQue es la votacion por orden de preferencia?',
+        'toc.2': 'Como funciona el conteo RCV, paso a paso',
+        'toc.3': 'Donde se usa hoy la votacion por orden de preferencia',
+        'toc.4': '\u00bfQue opinan realmente los votantes sobre RCV?',
+        'toc.5': '\u00bfAfecta el RCV la participacion electoral?',
+        'toc.6': 'Ventajas y desventajas de la votacion por orden de preferencia',
+        'toc.7': 'Como usar RCV en tus propias encuestas',
+        'intro.p1': 'La votacion por orden de preferencia (RCV, por sus siglas en ingles), tambien llamada votacion por eliminacion instantanea, esta transformando las elecciones en Estados Unidos. En lugar de elegir a un solo candidato, los votantes clasifican sus opciones en orden de preferencia. Si nadie obtiene una mayoria absoluta, el candidato mas debil es eliminado y las segundas opciones de sus votantes se redistribuyen, continuando hasta que alguien supera el umbral del 50%.',
+        'intro.p2': 'El concepto es sencillo, pero las implicaciones son significativas. El RCV cambia la forma en que se llevan las campanas, como los votantes expresan sus preferencias y como se determinan los ganadores. Este articulo cubre la mecanica, los datos sobre satisfaccion de los votantes y participacion, y las ventajas y desventajas reales, ademas de como puedes aplicar la logica de clasificacion a tus propias encuestas y decisiones grupales.',
+        's1.title': '1. \u00bfQue es la votacion por orden de preferencia?',
+        's1.p1': 'En una eleccion tradicional de pluralidad, cada votante elige a un candidato. El candidato con mas votos gana, incluso si eso significa ganar con el 30% del apoyo mientras el 70% de los votantes preferia a otra persona. La votacion por orden de preferencia aborda este problema al permitir que los votantes expresen una imagen mas completa de sus preferencias.',
+        's1.p2': 'Segun el <a href="https://www.csg.org/2023/03/21/ranked-choice-voting-what-where-why-why-not/" target="_blank" rel="noopener">Consejo de Gobiernos Estatales</a>, el RCV permite a los votantes clasificar a los candidatos en orden de preferencia: primera opcion, segunda opcion, tercera opcion, y asi sucesivamente. Si el candidato mejor clasificado de un votante es eliminado, su voto se transfiere al siguiente candidato en su lista, asegurando que su voz siga contando en el resultado final.',
+        's1.p3': 'La idea central: <strong>el ganador debe ser el candidato aceptable para el grupo mas amplio de votantes</strong>, no solo el que tiene la minoria mas apasionada.',
+        's2.title': '2. Como funciona el conteo RCV, paso a paso',
+        's2.p1': 'El proceso de conteo se denomina frecuentemente "eliminacion instantanea" porque simula multiples rondas de segunda vuelta en una sola papeleta. Asi es como funciona:',
+        's2.step1': '<strong>Se cuentan los votos de primera opcion.</strong> Cada papeleta se clasifica segun el candidato de primera opcion del votante. Si algun candidato recibe mas del 50% de los votos de primera opcion, gana directamente. Fin.',
+        's2.step2': '<strong>Se elimina al candidato en ultimo lugar.</strong> Si nadie tiene mayoria, el candidato con menos votos de primera opcion es eliminado de la carrera.',
+        's2.step3': '<strong>Se redistribuyen los votos.</strong> Los votantes que clasificaron al candidato eliminado en primer lugar ahora ven sus papeletas transferidas al candidato de su segunda opcion.',
+        's2.step4': '<strong>Se repite hasta que surja un ganador mayoritario.</strong> Los pasos 2 y 3 continuan -- eliminando al candidato mas bajo y redistribuyendo votos en cada ronda -- hasta que un candidato tenga mas del 50% de las papeletas activas.',
+        's2.callout.title': 'Punto clave',
+        's2.callout.text': 'Los votantes nunca estan obligados a clasificar a todos los candidatos. Puedes clasificar tantos o tan pocos como desees. Si todos tus candidatos clasificados son eliminados, tu papeleta se considera "agotada" y ya no se cuenta en las rondas posteriores.',
+        's3.title': '3. Donde se usa hoy la votacion por orden de preferencia',
+        's3.p1': 'El RCV ya no es un experimento. Se usa en elecciones importantes en varios estados y decenas de ciudades. Este es el panorama actual:',
+        's3.p2': 'La historia de Alaska es particularmente notable. En 2024, una medida electoral para derogar el RCV <a href="https://news.ballotpedia.org/2026/01/07/alaska-voters-to-consider-ranked-choice-voting-repeal-initiative-in-2026-after-narrowest-defeat-in-state-history-in-2024/" target="_blank" rel="noopener">fracaso por el margen mas estrecho en la historia del estado</a>, mostrando lo divisivo y vigilado que se ha vuelto el debate sobre el RCV.',
+        's4.title': '4. \u00bfQue opinan realmente los votantes sobre el RCV?',
+        's4.p1': 'Una de las criticas mas comunes a la votacion por orden de preferencia es que confunde a los votantes. Los datos cuentan una historia diferente.',
+        's4.h3a': 'Santa Fe, Nuevo Mexico (2018)',
+        's4.p2': 'Segun los <a href="https://fairvote.org/resources/data-on-rcv/" target="_blank" rel="noopener">datos de FairVote sobre elecciones RCV</a>, las encuestas a la salida en la eleccion de Santa Fe con votacion clasificada en 2018 encontraron que <strong>el 94% de los votantes estaban satisfechos con la experiencia RCV</strong>, y <strong>el 71% dijo que queria usar la votacion clasificada de nuevo</strong> en futuras elecciones.',
+        's4.h3b': 'Ciudad de Nueva York (2021)',
+        's4.p3': 'La primera primaria con votacion clasificada de NYC en junio de 2021 fue la mayor prueba de RCV en la historia de EE.UU. Segun <a href="https://fairvote.org/resources/data-on-rcv/" target="_blank" rel="noopener">datos de encuestas post-electorales compilados por FairVote</a>:',
+        's4.li1': '<strong>Mas del 90% de los votantes</strong> encontraron la papeleta clasificada "sencilla de completar"',
+        's4.li2': '<strong>El 77% dijo que queria usar RCV de nuevo</strong> en futuras elecciones',
+        's4.li3': '<strong>Solo el 16% reporto sentirse confundido</strong> por el proceso de clasificacion',
+        's4.p4': 'Estos numeros son especialmente llamativos dado que la primaria de NYC en 2021 involucro un campo repleto de 13 candidatos a la alcaldia -- dificilmente una papeleta sencilla por cualquier medida.',
+        's4.callout.title': 'Contexto',
+        's4.callout.text': 'Las tasas de satisfaccion superiores al 90% son inusualmente altas para cualquier cambio en los procedimientos electorales. En comparacion, las nuevas leyes de identificacion de votantes, los redisenos de papeletas y los cambios de ubicacion de centros de votacion suelen generar significativamente mas frustracion entre los votantes.',
+        's5.title': '5. \u00bfAfecta el RCV la participacion electoral?',
+        's5.p1': 'Uno de los argumentos mas fuertes a favor de la votacion por orden de preferencia es su potencial para mejorar la participacion de los votantes, en particular al eliminar las segundas vueltas con baja participacion.',
+        's5.p2': 'Segun la <a href="https://fairvote.org/ranked-choice-voting-and-voter-turnout/" target="_blank" rel="noopener">investigacion de FairVote sobre RCV y participacion</a>, las elecciones tradicionales de segunda vuelta ven una <strong>caida media del 37% en la participacion electoral</strong> entre la primera ronda y la segunda vuelta. Eso significa que mas de un tercio de los votantes que acudieron a la eleccion inicial no regresan para la definitiva -- la eleccion que realmente determina al ganador.',
+        's5.p3': 'El RCV elimina este problema al consolidar el proceso en una sola eleccion. Todas las preferencias de los votantes se capturan en una sola papeleta, en un solo dia.',
+        's5.p4': 'Los datos de las ciudades que usan RCV respaldan esto. <strong>Minneapolis vio un aumento de 9.6 puntos porcentuales en la participacion electoral</strong> despues de adoptar la votacion por orden de preferencia, segun el <a href="https://fairvote.org/ranked-choice-voting-and-voter-turnout/" target="_blank" rel="noopener">analisis de participacion de FairVote</a>. Aunque la participacion se ve afectada por muchos factores -- entusiasmo por los candidatos, clima, contexto politico nacional -- el patron de participacion estable o aumentada bajo RCV es consistente en todas las jurisdicciones.',
+        's5.callout.title': 'Por que esto importa',
+        's5.callout.text': 'Cuando una segunda vuelta pierde al 37% de los votantes, el ganador esta siendo elegido por un grupo mas pequeno y menos representativo. El RCV mantiene a mas votantes en el proceso hasta la decision final, produciendo resultados que reflejan mejor al electorado completo.',
+        's6.title': '6. Ventajas y desventajas de la votacion por orden de preferencia',
+        's6.p1': 'El RCV no esta libre de contrapartidas. Aqui tienes una evaluacion honesta basada en informes de <a href="https://www.britannica.com/procon/ranked-choice-voting-debate" target="_blank" rel="noopener">Britannica ProCon</a> y el <a href="https://www.americanbar.org/groups/public_interest/election_law/american-democracy/our-work/what-we-know-about-ranked-choice-voting-2025/" target="_blank" rel="noopener">analisis de 2025 de la Asociacion Americana de Abogados</a>.',
+        's6.h3a': 'Argumentos a favor',
+        's6.pro1': '<strong>Ganadores mayoritarios.</strong> El RCV asegura que el ganador tenga un apoyo amplio, no solo una pluralidad. En una carrera de cinco candidatos bajo reglas tradicionales, un candidato podria ganar con el 21% de los votos. Con RCV, el ganador debe eventualmente obtener mas del 50% de las papeletas activas.',
+        's6.pro2': '<strong>Elimina el efecto spoiler.</strong> Los candidatos de terceros partidos e independientes pueden presentarse sin ser culpados de "dividir el voto." Los votantes pueden clasificar a un candidato de un partido menor primero y a uno de un partido mayor segundo sin temor a desperdiciar su voto.',
+        's6.pro3': '<strong>Reduce las campanas negativas.</strong> Los candidatos tienen incentivos para atraer a los simpatizantes de sus oponentes para obtener clasificaciones de segunda opcion. La investigacion de la <a href="https://www.americanbar.org/groups/public_interest/election_law/american-democracy/our-work/what-we-know-about-ranked-choice-voting-2025/" target="_blank" rel="noopener">Asociacion Americana de Abogados</a> confirma que las elecciones RCV tienden a presentar menos publicidad negativa y campanas mas centradas en politicas.',
+        's6.pro4': '<strong>Ahorra dinero.</strong> Al eliminar las segundas vueltas separadas, las ciudades y estados evitan el costo de realizar una segunda eleccion. NYC estimo un ahorro de $20 millones por ciclo electoral al consolidar primarias y segundas vueltas.',
+        's6.pro5': '<strong>Mayor participacion.</strong> Como se discutio anteriormente, el RCV evita la dramatica caida de participacion que afecta a las elecciones tradicionales de segunda vuelta.',
+        's6.h3b': 'Argumentos en contra',
+        's6.con1': '<strong>Complejidad.</strong> Aunque la mayoria de los votantes consideran el RCV sencillo, el proceso de conteo es mas dificil de seguir en tiempo real. La tabulacion de multiples rondas toma mas tiempo que un simple conteo de pluralidad, y los resultados no siempre pueden anunciarse en la noche de las elecciones.',
+        's6.con2': '<strong>Agotamiento de papeletas.</strong> Si un votante solo clasifica a dos candidatos y ambos son eliminados, su papeleta se agota -- ya no cuenta. Los criticos argumentan que esto significa que el eventual ganador puede no tener verdaderamente el apoyo mayoritario de <em>todos</em> los votantes que emitieron papeletas, solo de aquellos cuyas papeletas permanecieron activas. Segun <a href="https://www.britannica.com/procon/ranked-choice-voting-debate" target="_blank" rel="noopener">Britannica ProCon</a>, este es uno de los aspectos mas debatidos del RCV.',
+        's6.con3': '<strong>Costos de implementacion.</strong> Actualizar el equipo de votacion, capacitar nuevamente al personal electoral y ejecutar campanas de educacion al votante requieren una inversion inicial -- aunque estos costos generalmente se compensan al eliminar las elecciones de segunda vuelta con el tiempo.',
+        's6.con4': '<strong>Posibilidad de violaciones de monotonicidad.</strong> En casos raros, clasificar a un candidato mas alto puede teoricamente hacer que pierda, o clasificarlo mas bajo puede ayudarle a ganar. Aunque esto es matematicamente posible, los casos documentados en el mundo real son extremadamente raros.',
+        's6.con5': '<strong>Resistencia politica.</strong> Los titulares y los partidos principales a veces se oponen al RCV porque beneficia a los retadores y candidatos de terceros partidos. Esto ha llevado a esfuerzos de derogacion en varias jurisdicciones.',
+        's6.callout.title': 'En resumen',
+        's6.callout.text': 'Ningun sistema de votacion es perfecto -- cada metodo implica compensaciones entre simplicidad, expresividad y resistencia estrategica. El RCV intercambia algo de simplicidad en el conteo por una expresion mas matizada de las preferencias de los votantes y una mayor legitimidad del ganador.',
+        's7.title': '7. Como usar RCV en tus propias encuestas',
+        's7.p1': 'La votacion por orden de preferencia no es solo para elecciones gubernamentales. La misma logica aplica cada vez que un grupo necesita tomar una decision entre multiples opciones y quieres que el resultado refleje un consenso amplio en lugar de una regla de pluralidad.',
+        's7.h3a': 'Cuando el RCV tiene sentido',
+        's7.use1': '<strong>Elecciones de equipo y votaciones de junta.</strong> Elegir un lider de equipo, presidente de comite o miembro de junta de un campo de tres o mas candidatos.',
+        's7.use2': '<strong>Decisiones de priorizacion.</strong> Clasificar funciones de productos, ideas de proyectos o asignaciones de presupuesto por prioridad del grupo.',
+        's7.use3': '<strong>Planificacion de eventos.</strong> Elegir un lugar, fecha o tema cuando hay muchas opciones y no hay un favorito claro.',
+        's7.use4': '<strong>Decisiones con multiples opciones sin mayoria clara.</strong> Cualquier escenario donde una votacion de pluralidad simple podria producir un ganador que la mayoria de la gente realmente no preferia.',
+        's7.h3b': 'Cuando quedarse con la votacion simple',
+        's7.simple1': '<strong>Decisiones binarias.</strong> Las preguntas de si/no no se benefician de la clasificacion.',
+        's7.simple2': '<strong>Dos opciones.</strong> Con solo dos opciones, el RCV es identico a una votacion estandar.',
+        's7.simple3': '<strong>Decisiones de bajo riesgo o urgentes.</strong> Si solo necesitas una respuesta rapida y lo que esta en juego es poco, una encuesta simple es mas rapida y facil para todos.',
+        's7.h3c': 'Ejecutar una encuesta RCV',
+        's7.p2': '<a href="https://pollpixie.com">Poll Pixie</a> admite encuestas de votacion clasificada, lo que facilita crear una votacion estilo RCV para tu equipo, organizacion o comunidad. Configura tus opciones, comparte el enlace y deja que los encuestados arrastren y suelten sus clasificaciones. El sistema maneja la tabulacion de eliminacion instantanea automaticamente y te muestra los resultados ronda por ronda.',
+        's7.callout.title': 'Buena practica',
+        's7.callout.text': 'Al ejecutar una encuesta RCV, informa a los participantes de antemano como funciona el conteo. Una explicacion de una oracion -- "Clasifica tus opciones en orden de preferencia; si tu primera opcion es eliminada, tu voto se transfiere a tu siguiente opcion" -- suele ser suficiente para eliminar la confusion.',
+        'cta.title': 'Ejecuta una encuesta de votacion clasificada',
+        'cta.text': 'Poll Pixie hace que la votacion por orden de preferencia sea facil. Crea una encuesta, comparte el enlace y obtiene resultados con tabulacion automatica de eliminacion instantanea.',
+        'cta.btn': 'Crear una encuesta RCV gratuita',
+        'related.title': 'Seguir leyendo',
+        'related.1.title': 'Como crear una encuesta en linea: La guia completa',
+        'related.1.desc': 'Una guia practica paso a paso para crear encuestas que la gente realmente quiera responder -- cubriendo tipos, redaccion de preguntas, estrategias de distribucion y analisis de resultados.',
+        'footer.tagline': 'La autoridad en tendencias, investigacion y mejores practicas de encuestas en linea.',
+        'footer.privacy': 'Privacidad',
+        'footer.terms': 'Terminos'
+      }
+    };
+    </script>
+    <script src="../i18n.js"></script>
+</body>
+</html>
